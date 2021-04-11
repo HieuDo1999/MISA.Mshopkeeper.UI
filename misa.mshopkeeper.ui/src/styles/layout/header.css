@@ -1,0 +1,151 @@
+.header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 150px);
+    height: 52px;
+
+    background: #fff;
+}
+.header .header-left{
+    width: 122px;
+    height: 52px;
+    align-items: center;
+    
+}
+.header-left .name{
+
+}
+.header .header-middle{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 947px !important;
+    height: 52px;
+
+}
+.header .header-middle .shop-list{
+    background-color: #fff !important;
+    position: absolute;
+    min-width: 162px;
+    margin: 0px;
+    height: 32px;
+    right: auto;
+    top: 10px;
+    left: 589px;
+    border: 1px solid #c3c3c3;
+    padding: 7px;
+    align-items: center !important;
+}
+
+.shop-list-wrap{
+    width: 146px;
+    height: 16px;
+    justify-content: center;
+    display: flex;
+}
+.shop-list-name-wrap{
+    width: 134px;
+    height: 16px;
+    
+}
+.shop-list-name{
+    font: 500 13px Roboto;
+    color: #212121;
+    padding: 0 5px;
+    max-width: 100%;
+    text-align: -webkit-center;
+}
+.arrow-down{
+    width: 12px;
+    height: 2;
+   
+}
+
+.header .header-middle .shop-list:hover{
+    background-color: none !important;
+}
+
+.header .header-middle .account{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    height: 32px;
+    right: auto;
+    top: 10px;
+    left: 759px;
+   
+    height: 34px;
+    right: 0;
+    justify-content: center;
+
+}
+.btn-account{
+    background-color: #fff !important;
+    display: flex;
+}
+.account-img{
+    width: 28px !important;
+   
+    text-align: center !important;
+    display: inline-block !important;
+
+}
+.account-img{
+
+}
+.account-name{
+
+}
+
+.account .account-img{
+
+}
+.account .account-name{
+
+}
+.header .header-phone{
+    width: 30px;
+    height: 36px;
+    right: auto;
+    top: 0px;
+    margin: 0px;
+    left: 652px;
+    background-color: #2b3173;
+    border: 1px;
+    padding:7px;
+
+}
+.header-phone .phone-icon{
+    width: 30px;
+    height: 36px;
+
+}
+.header .header-ring{
+    margin: 0px;
+    width: 46px;
+    height: 36px;
+    right: auto;
+    top: 8px;
+    left: 700px;
+    padding: 7px;
+
+}
+.header-ring .ring-icon{
+
+}
+.header .header-question{
+    margin: 0px;
+    width: 46px;
+    height: 36px;
+    right: auto;
+    top: 8px;
+    left: 750px;
+    padding: 7px;
+
+}
+.header-question .question-icon{
+
+}
+

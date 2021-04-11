@@ -1,0 +1,39 @@
+.btn{
+    display: flex;
+    background-color: #2b3173;
+    border: none;
+    margin: 0!important;
+    padding: 0 7px!important;
+    height: 35px!important;
+    width: auto;
+    box-sizing: border-box;
+    outline: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: top;
+    overflow: hidden;
+
+    align-items: center;
+
+}
+.btn:hover{
+    background-color: #0088c1;
+}
+.btn-text{
+    font: 400 13px roboto;
+    color: #fff;
+    padding: 0 5px;
+    max-width: 100%;
+
+}
+.btn-wrap{
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: center;
+}
