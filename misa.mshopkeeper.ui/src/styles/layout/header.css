@@ -13,27 +13,36 @@
     
 }
 .header-left .name{
-
+    position:absolute;
+    padding: 0px 0px 0px 21px;
+    right: auto;
+    left: 0px;
+    top: 18px;
+    margin: 0px;
+    font-size: 18px!important;
+    font-weight: 700;
+    color: #212121;
+    font-weight: 700;
+    font-family: roboto;
 }
-.header .header-middle{
+ .header .header-middle{
     position: absolute;
     display: flex;
     align-items: center;
     height: 52px;
     left:122px;
-    right: 149px;
-    border-right: 1px solid #d0d0d0;;
+    width: calc(100% - 122px - 138px);
+    border-right: 1px solid #d0d0d0;
 
 }
 .header .header-middle .shop-list{
     background-color: #fff !important;
     position: absolute;
-    min-width: 162px;
     margin: 0px;
-    height: 32px;
-    right: 174px;
+    height: 16px;
+    right: 190px;
     top: 10px;
-    left: 1143px;
+    width:146px;
     border: 1px solid #c3c3c3;
     padding: 7px;
     align-items: center !important;
@@ -56,6 +65,8 @@
     padding: 0 5px;
     max-width: 100%;
     text-align: -webkit-center;
+    font: 500 15px Roboto;
+    color: #212121;
 }
 .arrow-down{
 
@@ -63,6 +74,7 @@
     width: 12px;
     height: 8px;
     align-self: center;
+    background-position: center;
 }
 
 .header .header-middle .shop-list:hover{
@@ -76,19 +88,30 @@
     margin: 0px;
     right: auto;
     top: 10px;
-    left: 1306px;
-    height: 35px;
-    right: 19px;
+    height: 18px;
+    right: 0px;
+    width:174px;
     justify-content: center;
-
-  
+    padding:7px;
+}
+.account-name{
+        align-self: center;
+            padding-right: 11px;
+    padding-top: 4px;
+    padding-left:5px !important;
 
 }
-.account{
+.btn-account .arrow-down{
 
+    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/arrow-down-line.png') no-repeat;
+    width: 12px;
+    height: 8px;
+    align-self: center;
+    background-position: center;
 }
 .btn-account{
     background-color: #fff !important;
+    display:flex;
 }
 .account-img{
     background-color: #fff !important;
@@ -100,6 +123,7 @@
     text-align: center !important;
     display: inline-block !important;
     background-size: contain;
+    margin-right:3px;
 }
 
 .account-name{
@@ -112,15 +136,15 @@
 .account .account-name{
 
 }
+
 .header .header-phone{
    position: absolute;
    bottom: 0px;
     top: 0px;
     margin: 0px;
-    left: 1615px;
     right: 92px;
-    
     border: 1px;
+    width:39px;
     padding-left:7px;
     padding-right: 7px;
 
@@ -143,11 +167,10 @@
 .header .header-ring{
     position: absolute;
     margin: 0px;
-    
     right: 46px;
+    width: 31px;
     top: 8px;
     bottom: 8px;
-    left: 1669px;
     padding: 7px;
     text-align: -webkit-center;
     border-right: 1px solid #c3c3c3;
@@ -170,18 +193,17 @@
 .header .header-question{
     position: absolute;
     margin: 0px;
-    right: auto;
+    right: 0px;
     top: 8px;
-    left: 1715px;
-    right: 0;
+    width:32px;
     padding: 7px;
     text-align: -webkit-center;
 
 }
 .header-question .question-icon{
     background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/icon_help_18.png') no-repeat;
-    width: 16px;
-    height: 18px;
+    width: 18px;
+    height: 20px;
     align-self: center;
     text-align: center !important;
     display: inline-block !important;

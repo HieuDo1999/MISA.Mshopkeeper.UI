@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ShopList from '../views/ShopList'
+// import ShopList from '../views/ShopList'
+import ShopDetail from '../views/ShopDetail'
 
 Vue.use(VueRouter)
 
@@ -8,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'ShopList',
-    component: ShopList
+    component: ShopDetail
   }
 ]
 

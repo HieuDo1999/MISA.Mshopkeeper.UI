@@ -4,7 +4,7 @@
       <div class="name">Cửa hàng</div>
     </div>
     <div class="header-middle">
-      <div class="btn shop-list">
+      <div class="shop-list">
         <div class="btn-wrap btn-shop-list">
           <div class="shop-list-wrap">
             <div class="shop-list-name-wrap">
@@ -16,9 +16,10 @@
         </div>
       </div>
       <div class="account">
-        <div class="btn btn-account">
+        <div class="btn-account">
           <div class="account-img"></div>
           <div class="account-name">Đỗ Trọng Hiếu</div>
+           <div class="arrow-down"> </div>
         </div>
       </div>
     </div>

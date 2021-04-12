@@ -1,117 +1,76 @@
 #shop-list{
     padding: 8px;
     width: calc(100% - 16px );
-    height: calc(100% - 52px);
+    height:calc(100% - 52px);
 }
-.grid-wrap{
+.data-content{
     width: 100%;
     height: 100%;
-
+    position:relative;
 }
-.grid-wrap .grid{
+.data-table {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right:0;
+}
+.grid {
     width: 100%;
-    height: 100%;
-    display: flex;
-    position: relative;
-    background-color: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+ 
+    /* background-color: red; */
 }
+​
 table{
     width: 100%;
+}
+table thead tr{
+    position:relative;
+   
+}
+.column{
+    height:60px;
+    border-right: 1px solid #e1e1e1;
+   
+    
+}
+.th-name{
+    padding: 7px 10px 6px;
+}
+.th-filter{
+    height: 35px;
+    position:relative;
+    width:100%;
+}
+.btn-filter{
+    position:absolute;
+    left:0px;
+    width:34px;
+    bottom:0;
+    top:0;
+
+    border: 1px solid #e1e1e1;;
+    background-color:#ffff;
+}
+.input-filter{
+   position:absolute;
+    top:0px;
+    
+    left:34px;
+    width:calc(100% - 38px);
+    bottom:0;
+    background-color:#fffff;
+     border: 1px solid #e1e1e1;;
     
 }
 table tbody tr{
-   border-right: 1px solid #d0d0d0;
-
+    height:32px;
 }
-table tbody{
-    border-width: 1px!important;
-    border-style: solid;
-    border-color: #e1e1e1;
-}
-.m-column{
-    height: 64px;
-    position: relative;
-    padding: 0;
-    border-right: 1px solid #d0d0d0;
-    color: #212121;
-    font: 400 13px/19px Roboto,'Open Sans','Helvetica Neue',helvetica,arial,verdana,sans-serif;
-    outline: 0;
-    background-color: #f0f0f0!important;
-}
-.header-title{
-    width: 100%;
-    height: 32px;
-   
-   
-}
-.header-filter{
-    display: flex;
-    height: 32px;
-    
-}
-.header-filter .btn-option{
-    
-    width: 40px;
-}
-.input-filter{
-    flex: 1;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #d0d0d0; 
-}
-.input-filter:focus{
-    border: 1px solid #636dde !important;
+table tbody tr:hover{
+    background-color:#EAEFF4;
 }
 
-.input-filter input{
-    width: 92%;
-    height: 20px;
- 
-    background-color: #fff;
-    border: none;
-}
-
-
-.column-shop-code{
-    position: absolute;
-    right: 1593px;
-    left: 0px;
-}
-.column-shop-name{
-    position: absolute;
-    right: 1343px;
-    left: 160px;
-}
-.column-shop-address{
-    position: absolute;
-    right: 280px;
-    left: 410px;
-
-}
-.column-shop-phone{
-    position: absolute;
-    right: 150px;
-    left: 1473px;
-
-}
-.column-shop-status{
-    position: absolute;
-    right: 0px;
-    left: 1591px;
-}
-.header-filter{
-    background-color: #fff;
-
-}
-.btn-option{
-   
-    border-color: #e1e1e1;
-    align-self: center;
-
-}
-.input-filter{
-
-}
 .grid-footer-wrap{
     height: 32px;
     position: absolute;
