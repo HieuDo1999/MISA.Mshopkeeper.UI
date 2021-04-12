@@ -4,7 +4,6 @@
     align-items: center;
     width: calc(100% - 150px);
     height: 52px;
-
     background: #fff;
 }
 .header .header-left{
@@ -17,11 +16,13 @@
 
 }
 .header .header-middle{
-    position: relative;
+    position: absolute;
     display: flex;
     align-items: center;
-    width: 947px !important;
     height: 52px;
+    left:122px;
+    right: 149px;
+    border-right: 1px solid #d0d0d0;;
 
 }
 .header .header-middle .shop-list{
@@ -30,9 +31,9 @@
     min-width: 162px;
     margin: 0px;
     height: 32px;
-    right: auto;
+    right: 174px;
     top: 10px;
-    left: 589px;
+    left: 1143px;
     border: 1px solid #c3c3c3;
     padding: 7px;
     align-items: center !important;
@@ -57,9 +58,11 @@
     text-align: -webkit-center;
 }
 .arrow-down{
+
+    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/arrow-down-line.png') no-repeat;
     width: 12px;
-    height: 2;
-   
+    height: 8px;
+    align-self: center;
 }
 
 .header .header-middle .shop-list:hover{
@@ -71,30 +74,34 @@
     display: flex;
     align-items: center;
     margin: 0px;
-    height: 32px;
     right: auto;
     top: 10px;
-    left: 759px;
-   
-    height: 34px;
-    right: 0;
+    left: 1306px;
+    height: 35px;
+    right: 19px;
     justify-content: center;
+
+  
+
+}
+.account{
 
 }
 .btn-account{
     background-color: #fff !important;
-    display: flex;
 }
 .account-img{
+    background-color: #fff !important;
+    display: flex;
+    background: url('https://misard.mshopkeeper.vn/backendg2/api/Image?id=&type=0&w=50&h=50&CompanyCode=misard') no-repeat;
     width: 28px !important;
-   
+    height: 28px;
+    align-self: center;
     text-align: center !important;
     display: inline-block !important;
-
+    background-size: contain;
 }
-.account-img{
 
-}
 .account-name{
 
 }
@@ -106,46 +113,78 @@
 
 }
 .header .header-phone{
-    width: 30px;
-    height: 36px;
-    right: auto;
+   position: absolute;
+   bottom: 0px;
     top: 0px;
     margin: 0px;
-    left: 652px;
-    background-color: #2b3173;
+    left: 1615px;
+    right: 92px;
+    
     border: 1px;
-    padding:7px;
+    padding-left:7px;
+    padding-right: 7px;
 
 }
-.header-phone .phone-icon{
-    width: 30px;
-    height: 36px;
-
-}
-.header .header-ring{
-    margin: 0px;
+.header-phone .phone-background{
+    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/misasupport_1.png') no-repeat;
     width: 46px;
-    height: 36px;
-    right: auto;
+    height: 52px;
+    align-self: center;
+    text-align: center !important;
+    display: inline-block !important;
+    background-size: contain;
+    background-color: #2b3173;
+
+}
+.phone-icon{
+
+}
+
+.header .header-ring{
+    position: absolute;
+    margin: 0px;
+    
+    right: 46px;
     top: 8px;
-    left: 700px;
+    bottom: 8px;
+    left: 1669px;
     padding: 7px;
+    text-align: -webkit-center;
+    border-right: 1px solid #c3c3c3;
+    
 
 }
 .header-ring .ring-icon{
 
+    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/notify-18.png') no-repeat;
+    width: 16px;
+    height: 18px;
+    align-self: center;
+    text-align: center !important;
+    display: inline-block !important;
+    background-size: contain;
+  
+
 }
+
 .header .header-question{
+    position: absolute;
     margin: 0px;
-    width: 46px;
-    height: 36px;
     right: auto;
     top: 8px;
-    left: 750px;
+    left: 1715px;
+    right: 0;
     padding: 7px;
+    text-align: -webkit-center;
 
 }
 .header-question .question-icon{
-
+    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/icon_help_18.png') no-repeat;
+    width: 16px;
+    height: 18px;
+    align-self: center;
+    text-align: center !important;
+    display: inline-block !important;
+    background-size: contain;
 }
 

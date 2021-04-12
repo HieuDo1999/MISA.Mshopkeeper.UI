@@ -21,6 +21,7 @@ export default {
 #app{
    font-family: roboto,Tahoma,sans-serif!important;
     font-size: 13px;
+   
 }
 
 @import 'styles/setup/index.css';

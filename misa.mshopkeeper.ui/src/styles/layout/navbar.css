@@ -37,7 +37,6 @@
   cursor: pointer;
   line-height: 44px;
   position: relative;
-  display: inline-block;
   width: 150px;
   margin: 0 auto;
   height: 40px;
@@ -47,40 +46,77 @@
     background-color: #1e235a;
 }
 
-
-
 .nav-item .nav-item-icon {
-    position: absolute;
-    height: 38px;
-    left: 8px;
-    top: 2px;
-    width: 22px;
   align-self: center;
   margin-right: 10px;
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; 
+}
+
+.nav-item-dashboard {
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarmenu.png?v=1') no-repeat -28px 6px;
+  width: 26px;
+  height: 38px;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+}
+.nav-item-report {
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarmenu.png?v=1') no-repeat -28px -271px;
+  width: 26px;
+  height: 38px;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+
+}
+.nav-item-order {
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarmenu.png?v=1') no-repeat -28px -192px;
+  width: 26px;
+  height: 38px;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+
+}
+.nav-item-buy {
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarmenu.png?v=1') no-repeat -28px -231px;
+  width: 26px;
+  height: 38px;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+ 
+}
+.nav-item-promotion {
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarmenu.png?v=1') no-repeat -28px -312px;
+  width: 26px;
+  height: 38px;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+  
+}
+.nav-item-manage-shop {
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarmenu.png?v=1') no-repeat -28px -381px;
+  width: 26px;
+  height: 38px;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+
+}
+.nav-item-product {
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarmenu.png?v=1') no-repeat -28px -416px;
+  width: 26px;
+  height: 38px;
+  position: absolute;
+  left: 8px;
+  top: 2px;
  
 }
 
 
-.nav-item-dashboard {
-    width: 100%;
-}
-.nav-item-order {
-    width: 100%;
-}
-.nav-item-buy {
-    width: 100%;
-}
-.nav-item-promotion {
-    width: 100%;
-}
-.nav-item-manage-shop {
-    width: 100%;
-}
-.nav-item-product {
 
-  width: 100%;}
 
 .navbar .navbar-content .nav-item .nav-item-text{
     position: absolute;
