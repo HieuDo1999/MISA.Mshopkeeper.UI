@@ -25,11 +25,13 @@
    
     <div class="data-content">
       <div class="grid data-table">
-        <table style="width:100%">
+         <table style="width:100%; border-spacing:0px">
           <thead>
             <tr>
               <th class="column shop-code">
+                
                 <div class="th-name">Mã cửa hàng</div>
+               
                 <div class="th-filter">
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
@@ -75,7 +77,7 @@
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="table-grid">
           <tr>
           <td>a</td>
           <td>a</td>
@@ -90,8 +92,25 @@
           <td>a</td>
           <td>a</td>
           </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
           </tbody>
-        </table>
+        </table>  
+      
+
+    
       </div>
       <div class="footer">
         <div class="footer-icon">
