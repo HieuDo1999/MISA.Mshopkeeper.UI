@@ -1,6 +1,27 @@
 <template>
   <div id="shop-list">
-    <Toolbar></Toolbar>
+    <div class="toolbar">
+    <button class="btn btn-toolbar btn-add" @click="add">
+        <div class="icon-toolbar icon-add"></div>
+        <div  class="btn-text text-add" >Thêm mới</div>
+    </button>
+    <button class="btn btn-toolbar">
+      <div class="icon-toolbar icon-duplicate"></div>
+      <div class="btn-text text-duplicate">Nhân bản</div>
+    </button>
+    <button class="btn btn-toolbar">
+      <div class="icon-toolbar icon-edit"></div>
+      <div class="btn-text text-edit">Sửa</div>
+    </button>
+    <button class="btn btn-toolbar">
+      <div class="icon-toolbar icon-delete"></div>
+      <div class="btn-text text-delete">Xóa</div>
+    </button>
+    <button class="btn btn-toolbar">
+      <div class="icon-toolbar icon-refresh"></div>
+      <div class="btn-text text-refresh">Nạp</div>
+    </button>
+  </div>
    
     <div class="data-content">
       <div class="grid data-table">
@@ -108,15 +129,28 @@
         </div>
       </div>
     </div>
-    <ShopDetail ></ShopDetail>
+    <ShopDetail @closeDialog="closeDialog" v-if="!isHideParent" ></ShopDetail>
   </div>
 </template>
 
 <script>
-import Toolbar from "../components/layout/Toolbar.vue";
+
 import ShopDetail from './ShopDetail.vue';
 export default {
-  components: { Toolbar, ShopDetail },
+  components: {  ShopDetail },
+  data(){
+    return {
+      isHideParent: true,
+    }
+  },
+  methods:{
+    add(){
+      this.isHideParent=false;
+    },
+    closeDialog(){
+      this.isHideParent=true;
+    }
+  }
 };
 </script>
 

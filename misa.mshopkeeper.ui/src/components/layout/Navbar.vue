@@ -22,18 +22,18 @@
         <div class="nav-item-icon  nav-item-buy"></div>
         <div class="nav-item-text">Mua hàng</div>
       </a>
-      <a class="nav-item" :href="customer">
+      <a class="nav-item" >
         <div class="nav-item-icon  nav-item-promotion"></div>
         <div class="nav-item-text">Khuyến mại</div>
       </a>
-      <router-link class="nav-item" to="/dictionary/customer">
+      <a class="nav-item">
         <div class="nav-item-icon  nav-item-manage-shop"></div>
         <div class="nav-item-text">Quản lý cửa hàng</div>
-      </router-link>
-      <router-link class="nav-item" to="/dictionary/employee">
+      </a>
+      <a class="nav-item" >
         <div class="nav-item-icon  nav-item-product"></div>
         <div class="nav-item-text">Hàng hóa</div>
-      </router-link>
+      </a>
     </div>
   </div>
 </template>
