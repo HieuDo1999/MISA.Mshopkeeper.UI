@@ -232,5 +232,12 @@ table tr:nth-child(even){
 table tr:nth-child(1){
     background-color:skyblue;
 }
+table{
+    overflow-y: auto;
+}
 
+.table-grid{
+   
+    overflow: auto;
+}
 

@@ -25,7 +25,7 @@
    
     <div class="data-content">
       <div class="grid data-table">
-         <table style="width:100%; border-spacing:0px">
+         <table style="width:100%; border-spacing:0px;  ">
           <thead>
             <tr>
               <th class="column shop-code">
@@ -79,6 +79,76 @@
           </thead>
           <tbody class="table-grid">
           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          <td>a</td>
+          </tr>
+           <tr>
           <td>a</td>
           <td>a</td>
           <td>a</td>
