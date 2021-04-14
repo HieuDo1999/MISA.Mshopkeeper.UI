@@ -1,0 +1,127 @@
+.alert-background {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    opacity: 0.5;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 4;
+  }
+  .alert-container {
+    z-index: 5;
+    width: 400px;
+    height: 156px;
+    background-color: #fff;
+    position: fixed;
+    top: calc((100vh - 156px) / 2);
+    left: calc((100vw - 400px) / 2);
+    z-index: 5;
+    border: 2px solid #dfdfdf;
+  }
+
+  .alert-header{
+    padding:10px 14px;
+    background-color: #f0f0f0;
+    height: 19px;
+    width: 370px;
+    display: flex;
+  }
+  .title{
+      width: 348px;
+     
+      font: 600 16px Roboto!important;
+      color: #212121;
+  }
+  .icon-x{
+      flex:1;
+      background: url('https://eshopvnappg1.misacdn.net/QLCH/resources/images/common-icon.png') 
+      no-repeat  -1102px -153px;
+      height:16px;
+      width: 16px;
+      position: absolute;
+      right: 14px;
+      top: 11px;
+
+  }
+  .alert-content{
+      height: 44px;
+      padding: 10px;
+      position: relative;
+        border-top: 1px solid #dfdfdf;
+        border-bottom: 1px solid #dfdfdf;
+  }
+  .icon-alert{
+    background: url('https://eshopvnappg1.misacdn.net/QLCH/resources/images/icon-popup.png') 
+      no-repeat  -111px -2px;
+      height:44px;
+      width: 44px;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+  }
+  .content-text{
+    height: 34px;
+    position: absolute;
+    left: 64px;
+    color: #404040;
+    font-size: 13px;
+    line-height: 17px;
+    font-weight: 300;
+    font-family: open sans,helvetica neue,helvetica,arial,verdana,sans-serif;
+  }
+  .alert-footer{
+    padding: 8px 0px 8px 6px;
+    height: 36px;
+    position: relative;
+  }
+  .footer-btn-delete{
+    width: 59px;
+    height: 16px;
+    padding: 7px;
+    border: 1px;
+    background-color: #df4646;
+    position: absolute;
+    right: 83px;
+  }
+  .footer-icon-delete{
+    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png') no-repeat -1077px -112px;
+    height: 30px;
+    width: 20px;
+    position: absolute;
+    left: 7px;
+    top: -10px;
+  }
+  .text-delete{
+    text-align: center;
+    font-family: Roboto!important;
+    border-color: none;
+    color: #fff;
+    font-weight: 700;
+
+
+  }
+  .footer-btn-agree{
+      width: 59px;
+      height: 16px;
+      padding: 7px;
+      background-color: #2b3173;
+        position: absolute;
+        right: 5px;
+        top: 8px;
+        border: 1px solid #5897ce
+
+  }
+  .footer-btn-agree:hover{
+        cursor: pointer;
+        background-color: #6b6f9d;
+  }
+  .text-agree{
+    text-align: -webkit-center;
+      font-family: roboto,Tahoma,sans-serif!important;
+      color: #2b3173;
+        font-weight: 700;
+        font: 400 12px/16px 'Open Sans','Helvetica Neue',helvetica,arial,verdana,sans-serif;
+        color: #f0f0f0;
+
+  }

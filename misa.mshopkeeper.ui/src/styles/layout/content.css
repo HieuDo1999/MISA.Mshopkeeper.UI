@@ -7,4 +7,5 @@
     width: calc(100% - 150px);
     height: calc(100% - 52px);
     background-color: #e5e6eb;
+    overflow: hidden;
 }

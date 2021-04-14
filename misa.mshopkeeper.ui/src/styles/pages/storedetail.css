@@ -29,70 +29,91 @@
     right: 7px;
     top: 8px;;
 }
-.btn-1{
-    width: 66px;
-    height: 35px;
-    background-color: #2b3173;
-    border:1px solid #2b3173!important;
-    position: absolute;
-    left: 280px;
+
+.dialog-footer .dialog-footer-right {
+  display: flex;
+  flex: 1;
+  align-items: center;
+ 
+}
 
 
+.btn-right{
+  position: relative;
+  width: 65px;
+  padding:7px;
+  border: 1px solid #2b3173;
+  height: 35px;
 }
-.btn-2{
-     border:1px solid #2b3173!important;
-     width: 138px; 
-     margin-right: 8px;
-}
-.btn-4{
-    width: 90px;
-    background-color: #fff;
-}
-.btn-4:hover{
-    border: 1px solid #5fa2dd !important;
-}
-.text-save{
-    position: absolute;
-    right: 0px;
-    top: 8px;
-    color: #fff !important;
+.btn-save{
+  width: 66px;
+  height: 35px;
+  background-color: #2b3173;
+  border:1px solid #2b3173!important;
+  position: absolute;
+  right: 231px;
 }
 .icon-save{
-background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarmenu.png?v=1')
- no-repeat -28px 6px;
-  width: 26px;
-  height: 38px;
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png')
+  no-repeat -324px -127px;
+    width: 24px;
+    height: 27px;
+    position: absolute;
+    left: 8px;
+    top: 8px;
+}
+.text-save{
   position: absolute;
-  left: 8px;
-  top: 2px;
+  right: 8px;
+  top: 8px;
+  color: #fff !important;
+}
+.btn-plus{
+  border:1px solid #2b3173!important;
+  width: 138px; 
+  height: 35px;
+  position: absolute;
+  right: 91px;
 }
 .icon-plus{
-    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png')
+  background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png')
   no-repeat  -26px -127px;
-  height: 40px !important;
+  height: 20px !important;
   width: 16px !important;
   position: absolute;
   padding:0px !important;
   left: 7px;
-  top: -17px;
+  top: 9px;
 }
 .text-plus{
     font-family: Roboto!important;
-    color: #fff;
+    font-size: 12px;
+    color: #2b3173;
     font-weight: 555;
     position: absolute;
-    right: 1px;
-    top:8px;
+    right: 13px;
+    top:10px;
+}
+
+.btn-cancel{
+ width: 85px;
+ background-color: #fff;
+  position: absolute;
+  right: 2px;
+  
+}
+.btn-cancel:hover{
+ border: 1px solid #5fa2dd !important;
 }
 .footer-icon-x{
     background: url("https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png")
     no-repeat -252px -127px;
-  height: 45px !important;
+    height: 20px !important;
     width: 15px !important;
     position: absolute;
     padding: 0px !important;
     left: 7px;
-    top: -17px;
+    top: 9px;
 }
 
 
@@ -251,7 +272,4 @@ background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/slibarme
   color: #2b3173;
   font-size: 600;
   padding: 0 5px;
-}
-.dialog-footer .dialog-footer-right {
-  display: flex;
 }

@@ -5,7 +5,7 @@
         <div class="icon-toolbar icon-add"></div>
         <div  class="btn-text text-add" >Thêm mới</div>
     </button>
-    <button class="btn btn-toolbar">
+    <button class="btn btn-toolbar" @click="alertMs">
       <div class="icon-toolbar icon-duplicate"></div>
       <div class="btn-text text-duplicate">Nhân bản</div>
     </button>
@@ -13,11 +13,11 @@
       <div class="icon-toolbar icon-edit"></div>
       <div class="btn-text text-edit">Sửa</div>
     </button>
-    <button class="btn btn-toolbar">
+    <button class="btn btn-toolbar" @click="confirmDelete">
       <div class="icon-toolbar icon-delete"></div>
       <div class="btn-text text-delete">Xóa</div>
     </button>
-    <button class="btn btn-toolbar">
+    <button class="btn btn-toolbar" @click="refresh">
       <div class="icon-toolbar icon-refresh"></div>
       <div class="btn-text text-refresh">Nạp</div>
     </button>
@@ -39,7 +39,7 @@
                   <input class="input-filter" />
                 </div>
               </th>
-              <th class="column shop-code">
+              <th class="column shop-name">
                 <div class="th-name">Ten cửa hàng</div>
                 <div class="th-filter">
                   <div class="btn-filter">
@@ -48,7 +48,7 @@
                   <input class="input-filter" />
                 </div>
               </th>
-               <th class="column shop-code">
+               <th class="column shop-address">
                 <div class="th-name">Dia chi</div>
                 <div class="th-filter">
                   <div class="btn-filter">
@@ -57,16 +57,16 @@
                   <input class="input-filter" />
                 </div>
               </th>
-               <th class="column shop-code">
+               <th class="column shop-phone">
                 <div class="th-name">So dien thoai</div>
                 <div class="th-filter">
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" />
+                  <input class="input-filter" v-model="store.phoneNumber" />
                 </div>
               </th>
-               <th class="column shop-code">
+               <th class="column shop-status">
                 <div class="th-name">Trang thai</div>
                 <div class="th-filter">
                   <select name="" id="">
@@ -78,104 +78,15 @@
             </tr>
           </thead>
           <tbody class="table-grid">
-          <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
+          <tr v-for="store in stores" :key="store.id" @dblclick="detail(store)">
+          <td>{{store.storeCode}}</td>
+          <td>{{store.storeName}}</td>
+          <td>{{store.address}}</td>
+          <td>{{store.phoneNumber}}</td>
+          <td v-if="store.status">Đang hoạt động</td>
+          <td v-else>Ngừng hoạt động</td>
           </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
-           <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          </tr>
+          
           </tbody>
         </table>  
       
@@ -218,19 +129,32 @@
         </div>
       </div>
     </div>
-    <ShopDetail @closeDialog="closeDialog" v-if="!isHideParent" ></ShopDetail>
+    <StoreDetail @refresh="refresh"  @closeDialog="closeDialog" v-if="!isHideParent" :store="store" ></StoreDetail>
+    <ConfirmDelete @cancelDelete="cancelDelete" v-if="isConfirm"></ConfirmDelete>
+    <Alert @agree="agree" v-if="isAlert"></Alert>
   </div>
 </template>
 
 <script>
 
-import ShopDetail from './ShopDetail.vue';
+import StoreDetail from './StoreDetail.vue';
+import axios from 'axios';
+import ConfirmDelete from './ConfirmDelete.vue';
+import Alert from './Alert.vue';
 export default {
-  components: {  ShopDetail },
+  components: {  StoreDetail, ConfirmDelete, Alert },
   data(){
     return {
       isHideParent: true,
+      stores:[],
+      store:{},
+      isConfirm:false,
+      isAlert:false,
+      
     }
+  },
+  created(){
+    this.fetchStores();
   },
   methods:{
     add(){
@@ -238,11 +162,35 @@ export default {
     },
     closeDialog(){
       this.isHideParent=true;
+    },
+    async fetchStores(){
+       var response=await axios.get("https://localhost:44362/api/v1/stores")
+          this.stores=response.data
+        
+    },
+    detail(store){
+      this.isHideParent=false;
+      this.store=store;
+    },
+    refresh(){
+      this.fetchStores();
+    },
+    confirmDelete(){
+      this.isConfirm=true;
+    },
+    alertMs(){
+      this.isAlert=true;
+    },
+    agree(){
+      this.isAlert=false;
+    },
+    cancelDelete(){
+      this.isConfirm=false
     }
   }
 };
 </script>
 
 <style>
-@import "../styles/pages/shoplist.css";
+@import "../styles/pages/storelist.css";
 </style>

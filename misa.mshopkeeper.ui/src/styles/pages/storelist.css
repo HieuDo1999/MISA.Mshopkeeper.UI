@@ -15,18 +15,26 @@
     top: 0;
     left: 0;
     right:0;
-   
-    
 }
 .grid {
    
- 
     /* background-color: red; */
 }
-​
-.th-name-wrap{
-    padding: 7px 10px 6px;
-} 
+.shop-code{
+    width: 160px;
+}
+.shop-name{
+    width: 250px;
+}
+.shop-address{
+
+}
+.shop-phone{
+    width: 130px;
+}
+.shop-status{
+    width: 150px;
+}
 .th-filter{
     height: 35px;
     position:relative;
@@ -185,7 +193,6 @@ table tbody tr:hover{
 .wrap-icon-5{
     left: 270px;
     position: absolute;
-    
 }
 .page-select{
     left: 300px;
@@ -209,6 +216,10 @@ table tbody tr:hover{
 .table-grid{
     border: 1px solid #e1e1e1;
 }
+
+table thead tr th{
+    text-align: -webkit-center;
+}
 table tbody tr {
     height: 32px;
 }
@@ -221,6 +232,7 @@ table tbody tr td{
     width: 139px;
     height: 19px;
     padding: 7px 10px 6px 10px;
+    
 }
 
 table tbody tr:nth-child(odd){
@@ -236,8 +248,17 @@ table{
     overflow-y: auto;
 }
 
-.table-grid{
-   
+.data-table{
+
     overflow: auto;
+    height: calc(100% - 54px);
+
 }
+table thead{
+    z-index: 1;
+    top: 0px;
+   
+}
+
+
 

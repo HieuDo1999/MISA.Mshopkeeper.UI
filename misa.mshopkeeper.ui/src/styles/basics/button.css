@@ -13,12 +13,11 @@
     text-decoration: none;
     vertical-align: top;
     overflow: hidden;
-
     align-items: center;
 
 }
 .btn:hover{
-    background-color: #0088c1;
+    background-color: #6b6f9d;
 }
 .btn-text{
     font: 400 13px roboto;
