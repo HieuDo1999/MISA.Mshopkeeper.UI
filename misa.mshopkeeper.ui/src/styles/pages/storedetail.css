@@ -7,7 +7,7 @@
     padding: 7px;
     align-items: center;
 }
-.btn-3{
+.btn-help{
     border: none;
     background-color: #ffffff;
     color: #2b3173;
@@ -22,6 +22,7 @@
   padding:0px !important;
   left: 7px;
   top: 8px;
+  border: none;
 
 }
 .text-help{
@@ -105,6 +106,10 @@
 .btn-cancel:hover{
  border: 1px solid #5fa2dd !important;
 }
+.btn-right .text-cancel{
+  top: 10px;
+  
+}
 .footer-icon-x{
     background: url("https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png")
     no-repeat -252px -127px;
@@ -118,8 +123,7 @@
 
 
 .dialog-header .icon-x {
-  background: url("https://eshopvnappg2.misacdn.net/QLCH/resources/images/tools/tool-sprites.png")
-    no-repeat -1127px -127px;
+ 
   height: 16px !important;
   width: 16px !important;
   position: absolute;
@@ -199,17 +203,23 @@
   border: 1px solid #e1e1e1;
 }
 .dialog-row .d-input:focus {
-  border: 1px solid #2b3173;
+  
+  border: 1px solid #636DDE !important;
 }
 .dialog-row .icon-exclamation {
+  background: url("https://eshopvnappg1.misacdn.net/QLCH/resources/images/form/exclamation.png")
+  no-repeat ;
+  height: 16px !important;
+  width: 16px !important;
+
+  padding: 0px !important;
   position: relative;
   left: 3px;
-  top: 35%;
+  top: 30%;
   min-width: 16px;
-  display: none;
 }
 .dialog-row .icon-exclamation:hover + span {
-  display: block;
+  
 }
 .dialog-row .input-required {
   position: relative;
@@ -240,7 +250,7 @@
   resize: none;
 }
 .dialog-row .d-text-area:focus {
-  border: 1px solid #2b3173;
+  border: 1px solid #636DDE !important;
 }
 .dialog-row .dialog-sub-row {
   display: flex;
@@ -273,3 +283,7 @@
   font-size: 600;
   padding: 0 5px;
 }
+
+/* .input-click{
+  border: 1px solid red !important;
+} */

@@ -46,7 +46,7 @@
     width:34px;
     bottom:0;
     top:0;
-
+    
     border: 1px solid #e1e1e1;;
     background-color:#ffff;
 }
@@ -56,6 +56,7 @@
     left: 13px;
 }
 .input-filter{
+    outline: none !important;
    position:absolute;
     top:0px;
     left:34px;
@@ -63,6 +64,11 @@
     bottom:0;
     background-color: #ffff;
     border: 1px solid #e1e1e1;
+}
+.input-filter:focus {
+    border-top: 1px solid #636DDE !important;
+    border-right: 1px solid #636DDE !important;
+    border-left: 1px solid #636DDE !important;
 }
 table tbody tr{
     height:32px;
@@ -236,13 +242,17 @@ table tbody tr td{
 }
 
 table tbody tr:nth-child(odd){
-    background-color:#eee;
-}
-table tr:nth-child(even){
     background-color:white;
 }
+table tr:nth-child(even){
+ 
+    background-color:#eee;
+}
 table tr:nth-child(1){
-    background-color:skyblue;
+    background-color:#E5E6EB;
+}
+table tr:nth-child(odd):hover{
+    background-color: #EAEFF4;
 }
 table{
     overflow-y: auto;
@@ -259,6 +269,14 @@ table thead{
     top: 0px;
    
 }
+table tr:hover{
+    background-color: #EAEFF4;
+}
+
+.selectedRow{
+    background-color: #E2E4F1 !important;
+}
+
 
 
 

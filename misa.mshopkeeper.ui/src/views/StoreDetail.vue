@@ -7,24 +7,30 @@
           <div class="left-header">
             <div class="header-title">Thêm mới cửa hàng</div>
           </div>
-          <button class="d-icon icon-x"></button>
+          <button class="d-icon icon-x"  @click="cancel"></button>
         </div>
         <div class="dialog-content">
           <div class="dialog-row">
             <label> Mã cửa hàng <span class="text-red">*</span> </label>
-            <input ref="storeCode" type="text" class="d-input required" v-model="store.storeCode"/>
+            <input ref="storeCode" type="text" class="d-input required" v-model="store.storeCode"
+             @click="clickInput =!clickInput" :class="{'input-click': clickInput}" @blur="validate('storeCode',store.storeCode)"/>
+            <div v-if="!this.validateFieldsName.storeCode">
             <div class="d-icon icon-exclamation"></div>
             <span class="input-required">
               Trường không được phép để trống
             </span>
+            </div>
+
           </div>
           <div class="dialog-row">
             <label> Tên cửa hàng <span class="text-red">*</span> </label>
-            <input type="text" class="d-input required" v-model="store.storeName" />
+            <input type="text" class="d-input required" v-model="store.storeName" @blur="validate('storeName',store.storeName)"/>
+              <div v-if="!this.validateFieldsName.storeName">
             <div class="d-icon icon-exclamation"></div>
             <span class="input-required">
               Trường không được phép để trống
             </span>
+            </div>
           </div>
           <div class="dialog-row">
             <label> Địa chỉ <span class="text-red">*</span> </label>
@@ -35,11 +41,14 @@
               rows="3"
               class="d-text-area required"
               v-model="store.address"
+              @blur="validate('address',store.address)"
             ></textarea>
+             <div v-if="!this.validateFieldsName.address">
             <div class="d-icon icon-exclamation"></div>
             <span class="input-required" style="top: 70%">
               Trường không được phép để trống
             </span>
+            </div>
           </div>
           <div class="dialog-row">
             <div class="dialog-sub-row">
@@ -94,7 +103,7 @@
         </div>
         <div class="dialog-footer">
           <div class="dialog-footer-left">
-            <button class="button-default btn-3">
+            <button class="button-default btn-help">
               <div
                 class="d-icon icon-help"
                 style="background-size: contain"
@@ -145,14 +154,24 @@ export default {
       districts:[],
       ward:"",
       wards:[],
+      clickInput:false,
+      validateFields:['storeCode','storeName','address'],
+      validateFieldsName:{
+        "storeCode":true,
+        "storeName":true,
+        "address":true
+      },
+     
+      
 
     };
   },
   created(){
-    this.fetchData();
+    this.fetchDataDetail();
+    this.fetchDataAdd();
   },
   methods: {
-    async fetchData(){
+    async fetchDataDetail(){
       try{
         let [country,countrys,province,provinces,district,districts,ward,wards]= await Promise.all([
          axios.get('https://localhost:44362/api/v1/countrys/'+this.store.countryId),
@@ -184,10 +203,55 @@ export default {
         console.log(e)
       }
     },
+     async fetchDataAdd(){
+      try{
+        let[countrys,provinces,districts,wards]= await Promise.all([
+      
+         axios.get('https://localhost:44362/api/v1/countrys'),
+        
+          axios.get('https://localhost:44362/api/v1/provinces'),
+       
+          axios.get('https://localhost:44362/api/v1/districts'),
+        
+          axios.get('https://localhost:44362/api/v1/wards'),
+        ])
+       
+        this.countrys=countrys.data.filter((c)=>{
+          return c.countryId != this.country.countryId
+        })
+        this.provinces=provinces.data.filter((c)=>{
+          return c.provinceId != this.province.provinceId
+        })
+        this.districts=districts.data.filter((c)=>{
+          return c.districtId != this.district.districtId
+        })
+        this.wards=wards.data.filter((c)=>{
+          return c.wardId != this.ward.wardId
+        })
+      }catch(e){
+        console.log(e)
+      }
+    },
     cancel() {
       this.$emit("closeDialog", true);
      this.$emit("refresh", true);
     },
+    validate(fieldName,fieldValue){
+       this.validateFields.filter((c)=>{
+
+        if(c==fieldName){
+       
+          if( fieldValue==null){
+          
+            this.validateFieldsName.fieldName=false;
+          }
+      }
+      })
+     
+      
+    },
+
+
     removeValidate() {
       // xoá border
       var form = document.getElementsByTagName("form")[0].elements;
@@ -244,30 +308,6 @@ export default {
       }
     },
   },
-  mounted() {
-    var form = document.getElementsByTagName("form")[0];
-
-    form.addEventListener(
-      "focus",
-      (event) => {
-        event.target.style.border = "1px solid #2b3173";
-        event.target.style.outline = "none";
-      },
-      true
-    );
-    form.addEventListener(
-      "blur",
-      (event) => {
-        if (
-          !event.target.value &&
-          event.target.tagName != "BUTTON" &&
-          event.target.classList.contains("required")
-        )
-          event.target.style.border = "1px solid red";
-        else event.target.style.border = "1px solid #e1e1e1";
-      },
-      true
-    );
-  },
+  
 };
 </script>

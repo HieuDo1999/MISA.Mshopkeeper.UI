@@ -17,10 +17,13 @@
 }
 .btn-text{
     padding-left: 20px !important;
-    font: 400 15px roboto;
-    color: #fff;
+
+    
     padding: 0 5px;
     max-width: 100%;
+
+    font: 400 13px roboto;
+    color: #fff;
 }
 .btn-add{
     display: flex;
@@ -30,12 +33,12 @@
 }
 
 .icon-add{
-    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png') no-repeat  -1304px -112px;
-    height: 30px;
+    background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png') no-repeat  -1px -127px;
+    height: 15px;
     width: 20px;
     position: absolute;
     left: -1px;
-    top: -6px;
+    top: 10px;
 }
 .icon-duplicate{
     background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png') no-repeat -972px -112px;

@@ -78,7 +78,7 @@
             </tr>
           </thead>
           <tbody class="table-grid">
-          <tr v-for="store in stores" :key="store.id" @dblclick="detail(store)">
+          <tr v-for="store in stores" :key="store.id" @dblclick="detail(store)" @click="selectRow(store)" :class="{'selectedRow': (store.storeCode == selectedStore)}">
           <td>{{store.storeCode}}</td>
           <td>{{store.storeName}}</td>
           <td>{{store.address}}</td>
@@ -150,6 +150,7 @@ export default {
       store:{},
       isConfirm:false,
       isAlert:false,
+      selectedStore:null,
       
     }
   },
@@ -159,6 +160,7 @@ export default {
   methods:{
     add(){
       this.isHideParent=false;
+      this.store={};
     },
     closeDialog(){
       this.isHideParent=true;
@@ -186,6 +188,9 @@ export default {
     },
     cancelDelete(){
       this.isConfirm=false
+    },
+    selectRow(store){
+      this.selectedStore=store.storeCode
     }
   }
 };
