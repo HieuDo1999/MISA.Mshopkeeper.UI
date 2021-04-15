@@ -311,7 +311,12 @@
   border: 1px solid red !important;
 }
 
-.checkbox{
+.checkbox-wrap{
   height: 32px;
-  margin-top:-5px;
+  margin-top:-12px;
+  display: flex;
+  align-items: center;
+}
+.checkbox-wrap input{
+  margin-left: 106px;
 }

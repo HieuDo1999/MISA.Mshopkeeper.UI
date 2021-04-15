@@ -175,8 +175,11 @@
               <input type="text" class="d-input" v-model="store.street" />
             </div>
           </div>
-          <div class="dialog-row ">
-              <div class="checkbox">aa</div>
+          <div class="dialog-row " v-if="!store.storeId">
+              <div class="checkbox-wrap">
+                <input type="checkbox">
+                <div class="checkbox-text">Ngừng hoạt động</div>
+              </div>
           </div>
         </div>
         <div class="dialog-footer">
