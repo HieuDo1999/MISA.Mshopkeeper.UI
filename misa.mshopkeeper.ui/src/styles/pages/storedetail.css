@@ -1,17 +1,19 @@
 .dialog-header{
     position: relative;
 }
-.btn-footer{
-    height: 35px;
-    position: relative;
-    padding: 7px;
-    align-items: center;
-}
+
 .btn-help{
     border: none;
     background-color: #ffffff;
     color: #2b3173;
     font: 600 13px Roboto!important;
+    width: 78px;
+    height: 35px;
+    margin-top: -10px;
+}
+.btn-help:hover{
+  cursor: pointer;
+  background-color: #E5E6Eb;
 }
 .icon-help{
     background: url("https://eshopvnappg2.misacdn.net/QLCH/resources/images/help.png")
@@ -53,7 +55,12 @@
   border:1px solid #2b3173!important;
   position: absolute;
   right: 231px;
+  cursor: pointer;
 }
+.btn-save:hover{
+  background-color: #6b6f9d;
+}
+
 .icon-save{
   background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png')
   no-repeat -324px -127px;
@@ -75,6 +82,10 @@
   height: 35px;
   position: absolute;
   right: 91px;
+  cursor: pointer;
+}
+.btn-plus:hover .text-plus{
+  color: #6B6F9D;
 }
 .icon-plus{
   background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png')
@@ -183,6 +194,7 @@
   display: flex;
   padding: 6px 0;
   justify-content: space-between;
+  position: relative;
 }
 .dialog-row label {
   white-space: nowrap;
@@ -222,9 +234,15 @@
   
 }
 .dialog-row .input-required {
-  position: relative;
-  display: none;
-  top: 100%;
+  position: absolute;
+  width: 200px;
+  background-color: red;
+  top: 40px;
+  height: 30px;
+  right: -207px;
+  display: flex;
+  align-items: center;
+  color: white;
 }
 .dialog-row .d-select {
   height: 32px;
@@ -287,3 +305,7 @@
 /* .input-click{
   border: 1px solid red !important;
 } */
+
+.warn{
+  border: 1px solid red !important;
+}

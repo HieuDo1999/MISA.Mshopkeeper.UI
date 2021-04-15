@@ -63,7 +63,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" v-model="store.phoneNumber" />
+                  <input class="input-filter"  />
                 </div>
               </th>
                <th class="column shop-status">

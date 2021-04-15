@@ -7,29 +7,60 @@
           <div class="left-header">
             <div class="header-title">Thêm mới cửa hàng</div>
           </div>
-          <button class="d-icon icon-x"  @click="cancel"></button>
+          <button class="d-icon icon-x" @click="cancel"></button>
         </div>
         <div class="dialog-content">
           <div class="dialog-row">
             <label> Mã cửa hàng <span class="text-red">*</span> </label>
-            <input ref="storeCode" type="text" class="d-input required" v-model="store.storeCode"
-             @click="clickInput =!clickInput" :class="{'input-click': clickInput}" @blur="validate('storeCode',store.storeCode)"/>
-            <div v-if="!this.validateFieldsName.storeCode">
-            <div class="d-icon icon-exclamation"></div>
-            <span class="input-required">
-              Trường không được phép để trống
-            </span>
-            </div>
+            <input
+              ref="storeCode"
+              type="text"
+              class="d-input required"
+              v-model="store.storeCode"
+              @click="clickInput = !clickInput"
+              @blur="validate('storeCode', store.storeCode)"
+              :class="{ 'warn': (this.validateFieldsName.storeCode==false) }"
+            />
 
+            <div
+              v-if="
+                !this.validateFieldsName.storeCode &&
+                (store.storeCode == null || !store.storeCode)
+              "
+            >
+              <div
+                class="d-icon icon-exclamation"
+                @mouseover="mouseOverStoreCode"
+                @mouseout="mouseOutStoreCode"
+              ></div>
+              <span class="input-required" v-if="mouseOver.storeCode">
+                Trường không được phép để trống
+              </span>
+            </div>
           </div>
           <div class="dialog-row">
             <label> Tên cửa hàng <span class="text-red">*</span> </label>
-            <input type="text" class="d-input required" v-model="store.storeName" @blur="validate('storeName',store.storeName)"/>
-              <div v-if="!this.validateFieldsName.storeName">
-            <div class="d-icon icon-exclamation"></div>
-            <span class="input-required">
-              Trường không được phép để trống
-            </span>
+            <input
+              type="text"
+              class="d-input required"
+              v-model="store.storeName"
+              @blur="validate('storeName', store.storeName)"
+              :class="{ warn: !this.validateFieldsName.storeName }"
+            />
+            <div
+              v-if="
+                !this.validateFieldsName.storeName &&
+                (store.storeName == null || !store.storeName)
+              "
+            >
+              <div
+                class="d-icon icon-exclamation"
+                @mouseover="mouseOverStoreName"
+                @mouseout="mouseOutStoreName"
+              ></div>
+              <span class="input-required" v-if="mouseOver.storeName">
+                Trường không được phép để trống
+              </span>
             </div>
           </div>
           <div class="dialog-row">
@@ -41,23 +72,37 @@
               rows="3"
               class="d-text-area required"
               v-model="store.address"
-              @blur="validate('address',store.address)"
+              @blur="validate('address', store.address)"
+              :class="{ warn: !this.validateFieldsName.address }"
             ></textarea>
-             <div v-if="!this.validateFieldsName.address">
-            <div class="d-icon icon-exclamation"></div>
-            <span class="input-required" style="top: 70%">
-              Trường không được phép để trống
-            </span>
+            <div
+              v-if="
+                !this.validateFieldsName.address &&
+                (store.address == null || !store.address)
+              "
+            >
+              <div
+                class="d-icon icon-exclamation"
+                @mouseover="mouseOverAddress"
+                @mouseout="mouseOutAddress"
+              ></div>
+              <span
+                class="input-required"
+                style="top: 70%"
+                v-if="mouseOver.address"
+              >
+                Trường không được phép để trống
+              </span>
             </div>
           </div>
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Số điện thoại</label>
-              <input type="text" class="d-input" v-model="store.phoneNumber"/>
+              <input type="text" class="d-input" v-model="store.phoneNumber" />
             </div>
             <div class="dialog-sub-row">
               <label for="" class="left-label">Mã số thuế</label>
-              <input type="text" class="d-input" v-model="store.storeTaxCode"/>
+              <input type="text" class="d-input" v-model="store.storeTaxCode" />
             </div>
           </div>
 
@@ -65,8 +110,10 @@
             <div class="dialog-sub-row">
               <label for="">Quốc gia</label>
               <select name="" id="" class="d-select">
-                <option>{{this.country.countryName}}</option>
-                <option v-for="country in countrys" :key="country.id">{{country.countryName}}</option>
+                <option>{{ this.country.countryName }}</option>
+                <option v-for="country in countrys" :key="country.id">
+                  {{ country.countryName }}
+                </option>
               </select>
             </div>
             <div class="dialog-sub-row"></div>
@@ -75,15 +122,19 @@
             <div class="dialog-sub-row">
               <label for="">Tỉnh/Thành phố</label>
               <select class="d-select">
-                <option >{{province.provinceName}}</option>
-                 <option v-for="province in provinces" :key="province.id" >{{province.provinceName}}</option>
+                <option>{{ province.provinceName }}</option>
+                <option v-for="province in provinces" :key="province.id">
+                  {{ province.provinceName }}
+                </option>
               </select>
             </div>
             <div class="dialog-sub-row">
               <label for="" class="left-label">Quận/Huyện</label>
               <select class="d-select">
-                <option >{{district.districtName}}</option>
-                 <option v-for="district in districts" :key="district.id" >{{district.districtName}}</option>
+                <option>{{ district.districtName }}</option>
+                <option v-for="district in districts" :key="district.id">
+                  {{ district.districtName }}
+                </option>
               </select>
             </div>
           </div>
@@ -91,8 +142,10 @@
             <div class="dialog-sub-row">
               <label for="">Phường/Xã</label>
               <select class="d-select">
-               <option >{{ward.wardName}}</option>
-                 <option v-for="ward in wards" :key="ward.id" >{{ward.wardName}}</option>
+                <option>{{ ward.wardName }}</option>
+                <option v-for="ward in wards" :key="ward.id">
+                  {{ ward.wardName }}
+                </option>
               </select>
             </div>
             <div class="dialog-sub-row">
@@ -103,20 +156,20 @@
         </div>
         <div class="dialog-footer">
           <div class="dialog-footer-left">
-            <button class="button-default btn-help">
+            <div class=" btn-help">
               <div
                 class="d-icon icon-help"
                 style="background-size: contain"
               ></div>
               <div class="d-text text-help">Trợ giúp</div>
-            </button>
+            </div>
           </div>
           <div class="dialog-footer-right">
-            <button class="btn-right btn-save">
+            <button class="btn-right btn-save" @click="saveAndAdd">
               <div class="icon-save"></div>
               <div class="text-save">Lưu</div>
             </button>
-            <button class="btn-right btn-plus">
+            <button class="btn-right btn-plus" @click="saveAndAdd">
               <div class="icon-plus"></div>
               <div class="text-plus">Lưu và thêm mới</div>
             </button>
@@ -139,128 +192,193 @@
 @import "../styles/pages/storedetail.css";
 </style>
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "Dialog",
-  props: ['store'],
+  props: ["store"],
   data: function () {
     return {
       submitTypeP: "",
-      country:'',
-      countrys:[],
-      province:"",
-      provinces:[],
-      district:"",
-      districts:[],
-      ward:"",
-      wards:[],
-      clickInput:false,
-      validateFields:['storeCode','storeName','address'],
-      validateFieldsName:{
-        "storeCode":true,
-        "storeName":true,
-        "address":true
+      country: "",
+      countrys: [],
+      province: "",
+      provinces: [],
+      district: "",
+      districts: [],
+      ward: "",
+      wards: [],
+      clickInput: false,
+      validateFields: ["storeCode", "storeName", "address"],
+      validateFieldsName: {
+        storeCode: true,
+        storeName: true,
+        address: true,
       },
-     
-      
-
+      mouseOver: {
+        storeCode: false,
+        storeName: false,
+        address: false,
+      },
+      isValidate:true,
     };
   },
-  created(){
-    this.fetchDataDetail();
+  created() {
     this.fetchDataAdd();
+
+    this.fetchDataDetail();
   },
   methods: {
-    async fetchDataDetail(){
-      try{
-        let [country,countrys,province,provinces,district,districts,ward,wards]= await Promise.all([
-         axios.get('https://localhost:44362/api/v1/countrys/'+this.store.countryId),
-         axios.get('https://localhost:44362/api/v1/countrys'),
-         axios.get('https://localhost:44362/api/v1/provinces/'+this.store.provinceId),
-          axios.get('https://localhost:44362/api/v1/provinces'),
-         axios.get('https://localhost:44362/api/v1/districts/'+this.store.districtId),
-          axios.get('https://localhost:44362/api/v1/districts'),
-         axios.get('https://localhost:44362/api/v1/wards/'+this.store.wardId),
-          axios.get('https://localhost:44362/api/v1/wards'),
-        ])
-        this.country=country.data
-         this.province=province.data
-          this.district=district.data
-           this.ward=ward.data
-        this.countrys=countrys.data.filter((c)=>{
-          return c.countryId != this.country.countryId
-        })
-        this.provinces=provinces.data.filter((c)=>{
-          return c.provinceId != this.province.provinceId
-        })
-        this.districts=districts.data.filter((c)=>{
-          return c.districtId != this.district.districtId
-        })
-        this.wards=wards.data.filter((c)=>{
-          return c.wardId != this.ward.wardId
-        })
-      }catch(e){
-        console.log(e)
+    async fetchDataDetail() {
+      if (this.store == {}) {
+        try {
+          let [
+            country,
+            countrys,
+            province,
+            provinces,
+            district,
+            districts,
+            ward,
+            wards,
+          ] = await Promise.all([
+            axios.get(
+              "https://localhost:44362/api/v1/countrys/" + this.store.countryId
+            ),
+            axios.get("https://localhost:44362/api/v1/countrys"),
+            axios.get(
+              "https://localhost:44362/api/v1/provinces/" +
+                this.store.provinceId
+            ),
+            axios.get("https://localhost:44362/api/v1/provinces"),
+            axios.get(
+              "https://localhost:44362/api/v1/districts/" +
+                this.store.districtId
+            ),
+            axios.get("https://localhost:44362/api/v1/districts"),
+            axios.get(
+              "https://localhost:44362/api/v1/wards/" + this.store.wardId
+            ),
+            axios.get("https://localhost:44362/api/v1/wards"),
+          ]);
+          this.country = country.data;
+          this.province = province.data;
+          this.district = district.data;
+          this.ward = ward.data;
+          this.countrys = countrys.data.filter((c) => {
+            return c.countryId != this.country.countryId;
+          });
+          this.provinces = provinces.data.filter((c) => {
+            return c.provinceId != this.province.provinceId;
+          });
+          this.districts = districts.data.filter((c) => {
+            return c.districtId != this.district.districtId;
+          });
+          this.wards = wards.data.filter((c) => {
+            return c.wardId != this.ward.wardId;
+          });
+        } catch (e) {
+          console.log(e);
+        }
       }
     },
-     async fetchDataAdd(){
-      try{
-        let[countrys,provinces,districts,wards]= await Promise.all([
-      
-         axios.get('https://localhost:44362/api/v1/countrys'),
-        
-          axios.get('https://localhost:44362/api/v1/provinces'),
-       
-          axios.get('https://localhost:44362/api/v1/districts'),
-        
-          axios.get('https://localhost:44362/api/v1/wards'),
-        ])
-       
-        this.countrys=countrys.data.filter((c)=>{
-          return c.countryId != this.country.countryId
-        })
-        this.provinces=provinces.data.filter((c)=>{
-          return c.provinceId != this.province.provinceId
-        })
-        this.districts=districts.data.filter((c)=>{
-          return c.districtId != this.district.districtId
-        })
-        this.wards=wards.data.filter((c)=>{
-          return c.wardId != this.ward.wardId
-        })
-      }catch(e){
-        console.log(e)
+    async fetchDataAdd() {
+      try {
+        let [countrys, provinces, districts, wards] = await Promise.all([
+          axios.get("https://localhost:44362/api/v1/countrys"),
+
+          axios.get("https://localhost:44362/api/v1/provinces"),
+
+          axios.get("https://localhost:44362/api/v1/districts"),
+
+          axios.get("https://localhost:44362/api/v1/wards"),
+        ]);
+
+        this.countrys = countrys.data.filter((c) => {
+          return c.countryId != this.country.countryId;
+        });
+        this.provinces = provinces.data.filter((c) => {
+          return c.provinceId != this.province.provinceId;
+        });
+        this.districts = districts.data.filter((c) => {
+          return c.districtId != this.district.districtId;
+        });
+        this.wards = wards.data.filter((c) => {
+          return c.wardId != this.ward.wardId;
+        });
+      } catch (e) {
+        console.log(e);
       }
     },
     cancel() {
       this.$emit("closeDialog", true);
-     this.$emit("refresh", true);
+      this.$emit("refresh", true);
     },
-    validate(fieldName,fieldValue){
-       this.validateFields.filter((c)=>{
-
-        if(c==fieldName){
-       
-          if( fieldValue==null){
-          
-            this.validateFieldsName.fieldName=false;
+    validate(fieldName, fieldValue) {
+      this.validateFields.filter((c) => {
+        if (c == fieldName) {
+          if (fieldValue == null || fieldValue == "") {
+            this.validateFieldsName[`${fieldName}`] = false;
+          } else {
+            this.validateFieldsName[`${fieldName}`] = true;
           }
-      }
-      })
+        }
+      });
+    },
+    validateForSaveAndAdd(){
+  this.validateFields.filter((c) => {
+         if (this.store[`${c}`] == null || !this.store[`${c}`]) {
+          this.validateFieldsName[`${c}`] = false;
+          this.isValidate=false;
+        }
+
+      });
+       this.validateFields.every((c) => {
+        if (this.store[`${c}`] == null || !this.store[`${c}`]) {
+            this.mouseOver[`${c}`] = true;
+          setTimeout(() => {    this.mouseOver[`${c}`] = false; }, 2000)
+         return  ;
+        }
+      });
      
+    },
+
+    saveAndAdd() {  
+   this.validateForSaveAndAdd()
+   if(this.isValidate){
+     alert("a")
+   }else{
+     alert("b")
+   }
+
+      
+     
+    },
+    mouseOverStoreCode(){
+      this.mouseOver.storeCode= true
+       setTimeout(() => {  this.mouseOver.storeCode = false }, 2000)
+    },
+      mouseOutStoreCode(){
+      this.mouseOver.storeCode=false
+     
+    },
+      mouseOverStoreName(){
+      this.mouseOver.storeName=true
+       setTimeout(() => {  this.mouseOver.storeName =false }, 2000)
+    },
+      mouseOverAddress(){
+      this.mouseOver.address=true
+       setTimeout(() => {  this.mouseOver.address =false}, 2000)
+    },
+     mouseOutStoreName(){
+      this.mouseOver.storeName=false
+
+    },
+      mouseOutAddress(){
+      this.mouseOver.address=false
       
     },
+    
 
-
-    removeValidate() {
-      // xoá border
-      var form = document.getElementsByTagName("form")[0].elements;
-      var iconExclamation = document.getElementsByClassName("icon-exclamation");
-      for (var i = 0; i < form.length; ++i) {
-        form[i].style.border = "1px solid #d2d2d2";
-        iconExclamation[i].style.display = "none";
-      }
-    },
     focusFirstElement() {
       this.$refs.storeCode.focus();
     },
@@ -277,12 +395,9 @@ export default {
       }
       return valid;
     },
-    reFocus(e) {
-      if (e.keyCode == 9) {
-        e.preventDefault();
-        console.log("re");
-        this.focusFirstElement();
-      }
+    reFocus() {
+       this.focusFirstElement();
+    
     },
     showForm() {
       this.removeValidate();
@@ -308,6 +423,9 @@ export default {
       }
     },
   },
-  
+
+  mounted(){
+    this.focusFirstElement();
+  }
 };
 </script>
