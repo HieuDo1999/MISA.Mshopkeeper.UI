@@ -9,7 +9,7 @@
         <div class="confirm-content">
             <div class="icon-question"></div>
             <div class="content-text">
-                Bạn có chắc chắn muốn xóa k2 ra khỏi danh sách cửa hàng?
+                Bạn có chắc chắn muốn xóa {{this.store.storeName}} ra khỏi danh sách cửa hàng?
             </div>
         </div>
 
@@ -30,6 +30,7 @@
 
 <script>
 export default {
+    props:["store"],
     methods:{
         cancel(){
            this.$emit("cancelDelete"); 

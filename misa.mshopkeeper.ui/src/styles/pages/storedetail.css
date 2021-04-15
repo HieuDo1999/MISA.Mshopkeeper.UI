@@ -170,6 +170,10 @@
   z-index: 5;
   border-radius: 3px;
 }
+.dialog-add{
+  height: 482px !important;
+}
+
 .dialog-container .dialog-header {
   display: flex;
   justify-content: space-between;
@@ -189,6 +193,11 @@
   padding: 16px 16px 0;
   border: 1px solid #e1e1e1;
 }
+.dialog-content-update{
+  height: 396px !important;
+}
+
+
 .dialog-content .dialog-row {
   width: 100%;
   display: flex;
@@ -284,7 +293,9 @@
   height: 61px;
   padding: 0 10px;
   justify-content: space-between;
-  flex: 1;
+  
+
+
 }
 .dialog-footer .dialog-footer-left {
   display: flex;
@@ -319,4 +330,8 @@
 }
 .checkbox-wrap input{
   margin-left: 106px;
+  
+}
+.checkbox-wrap input:focus{
+  background-color:#2b3173;
 }

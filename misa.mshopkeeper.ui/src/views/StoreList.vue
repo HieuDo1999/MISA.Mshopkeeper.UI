@@ -9,7 +9,7 @@
       <div class="icon-toolbar icon-duplicate"></div>
       <div class="btn-text text-duplicate">Nhân bản</div>
     </button>
-    <button class="btn btn-toolbar">
+    <button class="btn btn-toolbar" @click="edit">
       <div class="icon-toolbar icon-edit"></div>
       <div class="btn-text text-edit">Sửa</div>
     </button>
@@ -78,7 +78,7 @@
             </tr>
           </thead>
           <tbody class="table-grid">
-          <tr v-for="store in stores" :key="store.id" @dblclick="detail(store)" @click="selectRow(store)" :class="{'selectedRow': (store.storeCode == selectedStore)}">
+          <tr v-for="store in stores" :key="store.id" @dblclick="detail(store)" @click="selectRow(store)" :class="{'selectedRow': (store.storeCode == selectedStore.storeCode)}">
           <td>{{store.storeCode}}</td>
           <td>{{store.storeName}}</td>
           <td>{{store.address}}</td>
@@ -86,12 +86,8 @@
           <td v-if="store.status">Đang hoạt động</td>
           <td v-else>Ngừng hoạt động</td>
           </tr>
-          
           </tbody>
         </table>  
-      
-
-    
       </div>
       <div class="footer">
         <div class="footer-icon">
@@ -130,7 +126,7 @@
       </div>
     </div>
     <StoreDetail @refresh="refresh"  @closeDialog="closeDialog" v-if="!isHideParent" :store="store" ></StoreDetail>
-    <ConfirmDelete @cancelDelete="cancelDelete" @deleteStore="deleteStore" v-if="isConfirm"></ConfirmDelete>
+    <ConfirmDelete @cancelDelete="cancelDelete" @deleteStore="deleteStore" v-if="isConfirm" :store="store" ></ConfirmDelete>
     <Alert @agree="agree" v-if="isAlert"></Alert>
   </div>
 </template>
@@ -150,15 +146,22 @@ export default {
       store:{},
       isConfirm:false,
       isAlert:false,
-      selectedStore:null,
+      selectedStore:{},
       storeId:null,
-   
     }
   },
   created(){
     this.fetchStores();
+
+  },
+  mounted:{
+    
   },
   methods:{
+      edit(){
+      this.isHideParent=false;
+      }
+    ,
     add(){
       this.isHideParent=false;
       this.store={};
@@ -202,8 +205,9 @@ export default {
     },
   
     selectRow(store){
-      this.selectedStore=store.storeCode
+      this.selectedStore=store
       this.storeId=store.storeId
+      this.store=store
     }
   }
 };

@@ -2,14 +2,18 @@
   <div>
     <div class="dialog">
       <div class="dialog-background"></div>
-      <form class="dialog-container" @submit="submitFunc">
+      <form class="dialog-container" @submit="submitFunc" :class="{'dialog-add': !this.store.storeId}">
         <div class="dialog-header">
           <div class="left-header">
-            <div class="header-title">Thêm mới cửa hàng</div>
+           
+            <div class="header-title" v-if="!this.store.storeId">Thêm mới cửa hàng</div>
+          
+            <div class="header-title" v-else>Sửa cửa hàng</div>
+           
           </div>
           <button class="d-icon icon-x" @click="cancel"></button>
         </div>
-        <div class="dialog-content">
+        <div class="dialog-content" :class="{'dialog-content-update':this.store.storeId}">
           <div class="dialog-row">
             <label> Mã cửa hàng <span class="text-red">*</span> </label>
             <input
@@ -175,9 +179,9 @@
               <input type="text" class="d-input" v-model="store.street" />
             </div>
           </div>
-          <div class="dialog-row " v-if="!store.storeId">
+          <div class="dialog-row " v-if="store.storeId">
               <div class="checkbox-wrap">
-                <input type="checkbox">
+                <input type="checkbox" v-model="this.status">
                 <div class="checkbox-text">Ngừng hoạt động</div>
               </div>
           </div>
@@ -248,6 +252,7 @@ export default {
         address: false,
       },
       isValidate: true,
+      status:!this.store.status
     };
   },
   created() {
@@ -277,12 +282,12 @@ export default {
               "https://localhost:44362/api/v1/provinces/" +
                 this.store.provinceId
             ),
-            axios.get("https://localhost:44362/api/v1/provinces"),
+            axios.get("https://localhost:44362/api/v1/provinces/"+ this.store.countryId),
             axios.get(
               "https://localhost:44362/api/v1/districts/" +
                 this.store.districtId
             ),
-            axios.get("https://localhost:44362/api/v1/districts"),
+            axios.get("https://localhost:44362/api/v1/districts"+this.s),
             axios.get(
               "https://localhost:44362/api/v1/wards/" + this.store.wardId
             ),
@@ -374,6 +379,7 @@ export default {
       this.validateForSaveAndAdd();
       if (this.isValidate) {
         if(this.store.storeId){
+          this.store.status=this.status?1:0;
            const res=await axios.put(`https://localhost:44362/api/v1/stores/${this.store.storeId}`, this.store);
            if(res){
              this.store={}
@@ -393,6 +399,7 @@ export default {
        this.validateForSaveAndAdd();
       if (this.isValidate) {
         if(this.store.storeId){
+            this.store.status=this.status?1:0;
            const res=await axios.put(`https://localhost:44362/api/v1/stores/${this.store.storeId}`, this.store);
            if(res){
              this.$emit("closeDialog", true);
