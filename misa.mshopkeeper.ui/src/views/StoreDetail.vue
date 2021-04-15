@@ -15,11 +15,11 @@
             <input
               ref="storeCode"
               type="text"
-              class="d-input required"
+              class="d-input"
               v-model="store.storeCode"
               @click="clickInput = !clickInput"
               @blur="validate('storeCode', store.storeCode)"
-              :class="{ 'warn': (this.validateFieldsName.storeCode==false) }"
+              :class="{ warn: this.validateFieldsName.storeCode == false }"
             />
 
             <div
@@ -109,9 +109,15 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Quốc gia</label>
-              <select name="" id="" class="d-select">
-                <option>{{ this.country.countryName }}</option>
-                <option v-for="country in countrys" :key="country.id">
+              <select name="" id="" class="d-select" v-model="store.countryId">
+                <option :value="this.country.countryId">
+                  {{ this.country.countryName }}
+                </option>
+                <option
+                  v-for="country in countrys"
+                  :key="country.id"
+                  :value="country.countryId"
+                >
                   {{ country.countryName }}
                 </option>
               </select>
@@ -121,18 +127,30 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Tỉnh/Thành phố</label>
-              <select class="d-select">
-                <option>{{ province.provinceName }}</option>
-                <option v-for="province in provinces" :key="province.id">
+              <select class="d-select" v-model="store.provinceId">
+                <option :value="province.provinceId">
+                  {{ province.provinceName }}
+                </option>
+                <option
+                  v-for="province in provinces"
+                  :key="province.id"
+                  :value="province.provinceId"
+                >
                   {{ province.provinceName }}
                 </option>
               </select>
             </div>
             <div class="dialog-sub-row">
               <label for="" class="left-label">Quận/Huyện</label>
-              <select class="d-select">
-                <option>{{ district.districtName }}</option>
-                <option v-for="district in districts" :key="district.id">
+              <select class="d-select" v-model="store.districtId">
+                <option :value="district.districtId">
+                  {{ district.districtName }}
+                </option>
+                <option
+                  v-for="district in districts"
+                  :key="district.id"
+                  :value="district.districtId"
+                >
                   {{ district.districtName }}
                 </option>
               </select>
@@ -141,9 +159,13 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Phường/Xã</label>
-              <select class="d-select">
-                <option>{{ ward.wardName }}</option>
-                <option v-for="ward in wards" :key="ward.id">
+              <select class="d-select" v-model="store.wardId">
+                <option :value="ward.wardId">{{ ward.wardName }}</option>
+                <option
+                  v-for="ward in wards"
+                  :key="ward.id"
+                  :value="ward.wardId"
+                >
                   {{ ward.wardName }}
                 </option>
               </select>
@@ -153,10 +175,13 @@
               <input type="text" class="d-input" v-model="store.street" />
             </div>
           </div>
+          <div class="dialog-row ">
+              <div class="checkbox">aa</div>
+          </div>
         </div>
         <div class="dialog-footer">
           <div class="dialog-footer-left">
-            <div class=" btn-help">
+            <div class="btn-help">
               <div
                 class="d-icon icon-help"
                 style="background-size: contain"
@@ -165,7 +190,7 @@
             </div>
           </div>
           <div class="dialog-footer-right">
-            <button class="btn-right btn-save" @click="saveAndAdd">
+            <button class="btn-right btn-save" @click="save">
               <div class="icon-save"></div>
               <div class="text-save">Lưu</div>
             </button>
@@ -219,7 +244,7 @@ export default {
         storeName: false,
         address: false,
       },
-      isValidate:true,
+      isValidate: true,
     };
   },
   created() {
@@ -324,60 +349,89 @@ export default {
         }
       });
     },
-    validateForSaveAndAdd(){
-  this.validateFields.filter((c) => {
-         if (this.store[`${c}`] == null || !this.store[`${c}`]) {
-          this.validateFieldsName[`${c}`] = false;
-          this.isValidate=false;
-        }
-
-      });
-       this.validateFields.every((c) => {
+    validateForSaveAndAdd() {
+      this.validateFields.filter((c) => {
         if (this.store[`${c}`] == null || !this.store[`${c}`]) {
-            this.mouseOver[`${c}`] = true;
-          setTimeout(() => {    this.mouseOver[`${c}`] = false; }, 2000)
-         return  ;
+          this.validateFieldsName[`${c}`] = false;
+          this.isValidate = false;
         }
       });
-     
+      this.validateFields.every((c) => {
+        if (this.store[`${c}`] == null || !this.store[`${c}`]) {
+          this.mouseOver[`${c}`] = true;
+          setTimeout(() => {
+            this.mouseOver[`${c}`] = false;
+          }, 2000);
+          return;
+        }
+      });
     },
 
-    saveAndAdd() {  
-   this.validateForSaveAndAdd()
-   if(this.isValidate){
-     alert("a")
-   }else{
-     alert("b")
-   }
-
-      
-     
+    async saveAndAdd() {
+      this.validateForSaveAndAdd();
+      if (this.isValidate) {
+        if(this.store.storeId){
+           const res=await axios.put(`https://localhost:44362/api/v1/stores/${this.store.storeId}`, this.store);
+           if(res){
+             this.store={}
+           }
+        }else{
+         const res= await axios.post("https://localhost:44362/api/v1/stores", this.store);
+         if(res){
+            this.store={}
+             this.$emit("refresh", true);
+         }
+        }
+      } else {
+        alert("b");
+      }
     },
-    mouseOverStoreCode(){
-      this.mouseOver.storeCode= true
-       setTimeout(() => {  this.mouseOver.storeCode = false }, 2000)
+    async save() {
+       this.validateForSaveAndAdd();
+      if (this.isValidate) {
+        if(this.store.storeId){
+           const res=await axios.put(`https://localhost:44362/api/v1/stores/${this.store.storeId}`, this.store);
+           if(res){
+             this.$emit("closeDialog", true);
+           }
+        }else{
+          const res=await axios.post("https://localhost:44362/api/v1/stores", this.store);
+           if(res){
+             this.$emit("closeDialog", true);
+              this.$emit("refresh", true);
+           }
+        }
+      } else {
+        alert("b");
+      }
     },
-      mouseOutStoreCode(){
-      this.mouseOver.storeCode=false
-     
+    mouseOverStoreCode() {
+      this.mouseOver.storeCode = true;
+      setTimeout(() => {
+        this.mouseOver.storeCode = false;
+      }, 2000);
     },
-      mouseOverStoreName(){
-      this.mouseOver.storeName=true
-       setTimeout(() => {  this.mouseOver.storeName =false }, 2000)
+    mouseOutStoreCode() {
+      this.mouseOver.storeCode = false;
     },
-      mouseOverAddress(){
-      this.mouseOver.address=true
-       setTimeout(() => {  this.mouseOver.address =false}, 2000)
+    mouseOverStoreName() {
+      this.mouseOver.storeName = true;
+      setTimeout(() => {
+        this.mouseOver.storeName = false;
+      }, 2000);
     },
-     mouseOutStoreName(){
-      this.mouseOver.storeName=false
-
+    mouseOverAddress() {
+      this.mouseOver.address = true;
+      setTimeout(() => {
+        this.mouseOver.address = false;
+      }, 2000);
     },
-      mouseOutAddress(){
-      this.mouseOver.address=false
-      
+    mouseOutStoreName() {
+      this.mouseOver.storeName = false;
     },
-    
+    mouseOutAddress() {
+      this.mouseOver.address = false;
+    },
 
     focusFirstElement() {
       this.$refs.storeCode.focus();
@@ -396,8 +450,7 @@ export default {
       return valid;
     },
     reFocus() {
-       this.focusFirstElement();
-    
+      this.focusFirstElement();
     },
     showForm() {
       this.removeValidate();
@@ -424,8 +477,8 @@ export default {
     },
   },
 
-  mounted(){
+  mounted() {
     this.focusFirstElement();
-  }
+  },
 };
 </script>

@@ -130,7 +130,7 @@
       </div>
     </div>
     <StoreDetail @refresh="refresh"  @closeDialog="closeDialog" v-if="!isHideParent" :store="store" ></StoreDetail>
-    <ConfirmDelete @cancelDelete="cancelDelete" v-if="isConfirm"></ConfirmDelete>
+    <ConfirmDelete @cancelDelete="cancelDelete" @deleteStore="deleteStore" v-if="isConfirm"></ConfirmDelete>
     <Alert @agree="agree" v-if="isAlert"></Alert>
   </div>
 </template>
@@ -151,7 +151,8 @@ export default {
       isConfirm:false,
       isAlert:false,
       selectedStore:null,
-      
+      storeId:null,
+   
     }
   },
   created(){
@@ -162,6 +163,15 @@ export default {
       this.isHideParent=false;
       this.store={};
     },
+    async deleteStore(){
+      var response=await axios.delete(`https://localhost:44362/api/v1/stores/${this.storeId}` ,)
+       if(response){
+         alert("done")
+         this.isConfirm=false;
+         this.refresh()
+    }
+    },
+
     closeDialog(){
       this.isHideParent=true;
     },
@@ -188,9 +198,12 @@ export default {
     },
     cancelDelete(){
       this.isConfirm=false
+      this.isConfirmDelete=false
     },
+  
     selectRow(store){
       this.selectedStore=store.storeCode
+      this.storeId=store.storeId
     }
   }
 };

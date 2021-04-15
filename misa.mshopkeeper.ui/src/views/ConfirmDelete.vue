@@ -14,7 +14,7 @@
         </div>
 
         <div class="confirm-footer">
-            <div class="footer-btn-delete">
+            <div class="footer-btn-delete" @click="agree">
                 <div class="footer-icon-delete"></div>
                 <div class="text-delete">Xóa</div>
             </div>
@@ -32,7 +32,10 @@
 export default {
     methods:{
         cancel(){
-           this.$emit("cancelDelete");
+           this.$emit("cancelDelete"); 
+        },
+        agree(){
+             this.$emit("deleteStore");
         }
     }
 
