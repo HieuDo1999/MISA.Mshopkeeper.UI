@@ -6,10 +6,10 @@
       </a>
     </div>
     <div class="navbar-content">
-      <a class="nav-item">
+      <router-link :to="{'name':'/'}" class="nav-item">
         <div class="nav-item-icon nav-item-dashboard"></div>
         <div class="nav-item-text">Tổng quan</div>
-      </a>
+      </router-link>
       <a class="nav-item">
         <div class="nav-item-icon  nav-item-report"></div>
         <div class="nav-item-text">Báo cáo</div>
@@ -26,10 +26,10 @@
         <div class="nav-item-icon  nav-item-promotion"></div>
         <div class="nav-item-text">Khuyến mại</div>
       </a>
-      <a class="nav-item">
+      <router-link :to="{'name':'StoreList'}" class="nav-item">
         <div class="nav-item-icon  nav-item-manage-shop"></div>
         <div class="nav-item-text">Quản lý cửa hàng</div>
-      </a>
+      </router-link>
       <a class="nav-item" >
         <div class="nav-item-icon  nav-item-product"></div>
         <div class="nav-item-text">Hàng hóa</div>

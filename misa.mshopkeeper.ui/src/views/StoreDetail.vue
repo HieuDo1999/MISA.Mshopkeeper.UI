@@ -206,7 +206,7 @@
               <div class="text-plus">Lưu và thêm mới</div>
             </button>
             <button
-              style="border: none"
+            
               class="btn-right btn-cancel"
               @keydown="reFocus"
               @click="cancel"

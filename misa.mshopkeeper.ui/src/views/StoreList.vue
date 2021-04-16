@@ -9,11 +9,11 @@
       <div class="icon-toolbar icon-duplicate"></div>
       <div class="btn-text text-duplicate">Nhân bản</div>
     </button>
-    <button class="btn btn-toolbar" @click="edit">
+    <button class="btn btn-toolbar" @click="edit" :class="{disable: (this.selectedStore?true:false)}">
       <div class="icon-toolbar icon-edit"></div>
       <div class="btn-text text-edit">Sửa</div>
     </button>
-    <button class="btn btn-toolbar" @click="confirmDelete">
+    <button class="btn btn-toolbar" @click="confirmDelete"  :class="{disable:  (this.selectedStore?true:false)}">
       <div class="icon-toolbar icon-delete"></div>
       <div class="btn-text text-delete">Xóa</div>
     </button>
@@ -79,12 +79,22 @@
           </thead>
           <tbody class="table-grid">
           <tr v-for="store in stores" :key="store.id" @dblclick="detail(store)" @click="selectRow(store)" :class="{'selectedRow': (store.storeCode == selectedStore.storeCode)}">
-          <td>{{store.storeCode}}</td>
-          <td>{{store.storeName}}</td>
-          <td>{{store.address}}</td>
-          <td>{{store.phoneNumber}}</td>
-          <td v-if="store.status">Đang hoạt động</td>
-          <td v-else>Ngừng hoạt động</td>
+          <td class="store-code">{{store.storeCode}}</td>
+          <td class="store-name">{{store.storeName}}</td>
+          <td class="store-address" style="min-width:calc(100% - 39px);">{{store.address}}</td>
+          <td class="store-phone">{{store.phoneNumber}}</td>
+          <td class="store-status" v-if="store.status">Đang hoạt động</td>
+          <td class="store-status" v-else>Ngừng hoạt động</td>
+          </tr>
+
+           <tr>
+        <td class="store-code">ssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas</td>
+        <td class="store-name">ssssssssss11111111111111111111111111111111111ssssssss</td>
+        <td class="store-address">sssssssssssssss111111111111111111111111111ss</td>
+        <td class="store-phone">ssssssss11111111111111111111111111ssssss</td>
+        <td class="store-status">ssssssss1111111111111111111111111111111111ssssssss</td>
+      
+
           </tr>
           </tbody>
         </table>  
@@ -191,7 +201,13 @@ export default {
       this.fetchStores();
     },
     confirmDelete(){
-      this.isConfirm=true;
+      
+      if(this.selectedStore==Object.empty()){
+        return 
+      }else{
+         this.isConfirm=true;
+      }
+
     },
     alertMs(){
       this.isAlert=true;
