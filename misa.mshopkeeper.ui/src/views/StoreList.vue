@@ -9,11 +9,11 @@
       <div class="icon-toolbar icon-duplicate"></div>
       <div class="btn-text text-duplicate">Nhân bản</div>
     </button>
-    <button class="btn btn-toolbar" @click="edit" :class="{disable: (this.selectedStore?true:false)}">
+    <button class="btn btn-toolbar" @click="edit" :class="{disable: (Object.keys(this.selectedStore).length?false:true)} " :disabled="(this.selectedStore==Object.empty?true:false)">
       <div class="icon-toolbar icon-edit"></div>
       <div class="btn-text text-edit">Sửa</div>
     </button>
-    <button class="btn btn-toolbar" @click="confirmDelete"  :class="{disable:  (this.selectedStore?true:false)}">
+    <button class="btn btn-toolbar" @click="confirmDelete"  :class="{disable:  (Object.keys(this.selectedStore).length?false:true)}">
       <div class="icon-toolbar icon-delete"></div>
       <div class="btn-text text-delete">Xóa</div>
     </button>
@@ -201,8 +201,7 @@ export default {
       this.fetchStores();
     },
     confirmDelete(){
-      
-      if(this.selectedStore==Object.empty()){
+      if((Object.keys(this.selectedStore).length?false:true)){
         return 
       }else{
          this.isConfirm=true;
