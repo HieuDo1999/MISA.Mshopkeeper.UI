@@ -113,8 +113,8 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Quốc gia</label>
-              <select name="" id="" class="d-select" v-model="store.countryId">
-                <option :value="this.country.countryId">
+              <select name="" id="" class="d-select" v-model="store.countryId" @change="changeCountry(store.countryId)">
+                <option :value="this.country.countryId" v-if="country.countryId">
                   {{ this.country.countryName }}
                 </option>
                 <option
@@ -131,8 +131,8 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Tỉnh/Thành phố</label>
-              <select class="d-select" v-model="store.provinceId">
-                <option :value="province.provinceId">
+              <select class="d-select" v-model="store.provinceId" @change="changeProvince(store.provinceId)">
+                <option :value="province.provinceId" v-if="province.provinceId">
                   {{ province.provinceName }}
                 </option>
                 <option
@@ -146,14 +146,15 @@
             </div>
             <div class="dialog-sub-row">
               <label for="" class="left-label">Quận/Huyện</label>
-              <select class="d-select" v-model="store.districtId">
-                <option :value="district.districtId">
+              <select class="d-select" v-model="store.districtId" @change="changeDistrict(store.districtId)" :disabled="(true)">
+                <option :value="district.districtId" v-if="district.districtId">
                   {{ district.districtName }}
                 </option>
                 <option
                   v-for="district in districts"
                   :key="district.id"
                   :value="district.districtId"
+               
                 >
                   {{ district.districtName }}
                 </option>
@@ -163,8 +164,8 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Phường/Xã</label>
-              <select class="d-select" v-model="store.wardId">
-                <option :value="ward.wardId">{{ ward.wardName }}</option>
+              <select class="d-select" v-model="store.wardId"  >
+                <option :value="ward.wardId" v-if="ward.wardId" >{{ ward.wardName }}</option>
                 <option
                   v-for="ward in wards"
                   :key="ward.id"
@@ -290,11 +291,11 @@ export default {
               "https://localhost:44362/api/v1/districts/" +
                 this.store.districtId
             ),
-            axios.get("https://localhost:44362/api/v1/districts"),
+            axios.get("https://localhost:44362/api/v1/districts/GetDistrictWithProvince/"+this.store.provinceId),
             axios.get(
               "https://localhost:44362/api/v1/wards/" + this.store.wardId
             ),
-            axios.get("https://localhost:44362/api/v1/wards"),
+            axios.get("https://localhost:44362/api/v1/wards/GetWardWithDistrict/"+this.store.districtId),
           ]);
           this.country = country.data;
           this.province = province.data;
@@ -317,6 +318,26 @@ export default {
         }
       
     },
+    async changeCountry(countryId){
+      const res=await  axios.get("https://localhost:44362/api/v1/provinces/GetProvinceWithCountry/"+ countryId)
+      this.provinces=res.data
+      this.province={};
+      this.district={}
+      this.ward={}
+    },
+   async changeProvince(provinceId){
+        const res= await axios.get("https://localhost:44362/api/v1/districts/GetDistrictWithProvince/" + provinceId)
+        this.districts=res.data
+        this.district={}
+        this.ward={}
+    },
+    async changeDistrict(districtId){
+      const res= await axios.get("https://localhost:44362/api/v1/wards/GetWardWithDistrict/"+districtId)
+      this.wards=res.data
+      this.ward={}
+    },
+
+
     async fetchDataAdd() {
       try {
         let [countrys, provinces, districts, wards] = await Promise.all([
