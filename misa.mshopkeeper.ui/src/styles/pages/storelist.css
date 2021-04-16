@@ -245,6 +245,9 @@ table tbody tr:hover{
 
 table thead tr th{
     text-align: -webkit-center;
+   top: 0;
+   z-index: 1 !important;
+   position: sticky;
 }
 table tbody tr {
     height: 32px;
@@ -287,6 +290,7 @@ table{
 
     overflow: auto;
     height: calc(100% - 54px);
+
 
 }
 table thead{

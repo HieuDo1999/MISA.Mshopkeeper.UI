@@ -256,13 +256,16 @@ export default {
     };
   },
   created() {
+    if(this.store.storeId){
+         this.fetchDataDetail();
+    }else{
     this.fetchDataAdd();
-
-    this.fetchDataDetail();
+    }
+ 
   },
   methods: {
     async fetchDataDetail() {
-      if (this.store == {}) {
+     
         try {
           let [
             country,
@@ -282,12 +285,12 @@ export default {
               "https://localhost:44362/api/v1/provinces/" +
                 this.store.provinceId
             ),
-            axios.get("https://localhost:44362/api/v1/provinces/"+ this.store.countryId),
+            axios.get("https://localhost:44362/api/v1/provinces/GetProvinceWithCountry/"+ this.store.countryId),
             axios.get(
               "https://localhost:44362/api/v1/districts/" +
                 this.store.districtId
             ),
-            axios.get("https://localhost:44362/api/v1/districts"+this.s),
+            axios.get("https://localhost:44362/api/v1/districts"),
             axios.get(
               "https://localhost:44362/api/v1/wards/" + this.store.wardId
             ),
@@ -312,7 +315,7 @@ export default {
         } catch (e) {
           console.log(e);
         }
-      }
+      
     },
     async fetchDataAdd() {
       try {
