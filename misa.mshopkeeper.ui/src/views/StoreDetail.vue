@@ -131,7 +131,7 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Tỉnh/Thành phố</label>
-              <select class="d-select" v-model="store.provinceId" @change="changeProvince(store.provinceId)">
+              <select class="d-select" v-model="store.provinceId" @change="changeProvince(store.provinceId)" :disabled="(Object.keys(this.store).length?false:true)||this.store.countryId=={}">
                 <option :value="province.provinceId" v-if="province.provinceId">
                   {{ province.provinceName }}
                 </option>
@@ -146,7 +146,7 @@
             </div>
             <div class="dialog-sub-row">
               <label for="" class="left-label">Quận/Huyện</label>
-              <select class="d-select" v-model="store.districtId" @change="changeDistrict(store.districtId)" :disabled="(true)">
+              <select class="d-select" v-model="store.districtId" @change="changeDistrict(store.districtId)" >
                 <option :value="district.districtId" v-if="district.districtId">
                   {{ district.districtName }}
                 </option>
@@ -154,7 +154,6 @@
                   v-for="district in districts"
                   :key="district.id"
                   :value="district.districtId"
-               
                 >
                   {{ district.districtName }}
                 </option>

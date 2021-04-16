@@ -36,7 +36,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" />
+                  <input class="input-filter" v-model="this.filterStoreCode" @keyup="filterWithStoreCode" />
                 </div>
               </th>
               <th class="column shop-name">
@@ -45,7 +45,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" />
+                  <input class="input-filter"  v-model="this.filterStoreName" @keyup="filterWithStoreName"/>
                 </div>
               </th>
                <th class="column shop-address">
@@ -54,7 +54,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" />
+                  <input class="input-filter" v-model="this.filterAddress" @keyup="filterWithAddress"/>
                 </div>
               </th>
                <th class="column shop-phone">
@@ -63,13 +63,13 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter"  />
+                  <input class="input-filter"  v-model="this.filterStorephone" @keyup="filterWithStorephone"/>
                 </div>
               </th>
                <th class="column shop-status">
                 <div class="th-name">Trang thai</div>
                 <div class="th-filter">
-                  <select name="" id="">
+                  <select name="" id="" v-model="this.filterStoreStatus" @change="filterWithStoreStatus">
                     <option value="">Dang hoat dong</option>
                     <option value="">1</option>
                   </select>
@@ -158,6 +158,11 @@ export default {
       isAlert:false,
       selectedStore:{},
       storeId:null,
+      filterStoreCode:"",
+      filterStoreName:"",
+      filterAddress:"",
+      filterStorePhone:"",
+      filterStoreStatus:""
     }
   },
   created(){
@@ -168,6 +173,12 @@ export default {
     
   },
   methods:{
+      filterWithStoreCode(){
+         this.stores.filter((s)=>{
+          return s.storeCode==this.filterStoreCode
+        })
+      },
+
       edit(){
       this.isHideParent=false;
       }
