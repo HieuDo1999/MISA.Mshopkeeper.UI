@@ -36,7 +36,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" v-model="this.filterStoreCode" @keyup="filterWithStoreCode" />
+                  <input class="input-filter" />
                 </div>
               </th>
               <th class="column shop-name">
@@ -45,7 +45,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter"  v-model="this.filterStoreName" @keyup="filterWithStoreName"/>
+                  <input class="input-filter" />
                 </div>
               </th>
                <th class="column shop-address">
@@ -54,7 +54,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" v-model="this.filterAddress" @keyup="filterWithAddress"/>
+                  <input class="input-filter" />
                 </div>
               </th>
                <th class="column shop-phone">
@@ -63,13 +63,13 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter"  v-model="this.filterStorephone" @keyup="filterWithStorephone"/>
+                  <input class="input-filter" />
                 </div>
               </th>
                <th class="column shop-status">
                 <div class="th-name">Trang thai</div>
                 <div class="th-filter">
-                  <select name="" id="" v-model="this.filterStoreStatus" @change="filterWithStoreStatus">
+                  <select name="" id="">
                     <option value="">Dang hoat dong</option>
                     <option value="">1</option>
                   </select>
@@ -85,16 +85,6 @@
           <td class="store-phone">{{store.phoneNumber}}</td>
           <td class="store-status" v-if="store.status">Đang hoạt động</td>
           <td class="store-status" v-else>Ngừng hoạt động</td>
-          </tr>
-
-           <tr>
-        <td class="store-code">ssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas</td>
-        <td class="store-name">ssssssssss11111111111111111111111111111111111ssssssss</td>
-        <td class="store-address">sssssssssssssss111111111111111111111111111ss</td>
-        <td class="store-phone">ssssssss11111111111111111111111111ssssss</td>
-        <td class="store-status">ssssssss1111111111111111111111111111111111ssssssss</td>
-      
-
           </tr>
           </tbody>
         </table>  
@@ -169,16 +159,8 @@ export default {
     this.fetchStores();
 
   },
-  mounted:{
-    
-  },
   methods:{
-      filterWithStoreCode(){
-         this.stores.filter((s)=>{
-          return s.storeCode==this.filterStoreCode
-        })
-      },
-
+     
       edit(){
       this.isHideParent=false;
       }
