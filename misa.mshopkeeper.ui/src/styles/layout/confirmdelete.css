@@ -75,6 +75,9 @@
     height: 36px;
     position: relative;
   }
+  .btn-delete{
+    cursor: pointer;
+  }
   .footer-btn-delete{
     width: 59px;
     height: 16px;
@@ -83,6 +86,10 @@
     background-color: #df4646;
     position: absolute;
     right: 83px;
+
+  }
+  .footer-btn-delete:hover{
+    background-color: red;
   }
   .footer-icon-delete{
     background: url('https://eshopvnappg2.misacdn.net/QLCH/resources/images/common-icon.png') no-repeat -1077px -112px;
@@ -108,10 +115,13 @@
       background-color: #ffffff;
         position: absolute;
         right: 0px;
-        top: 8px;
+        top: 7px;
         border: 1px solid #f0f0f0;
 
   }
+   .footer-btn-cancel:hover{
+      border-color: #2b3173;
+   }
   .icon-cancel{
     background: url('https://eshopvnappg1.misacdn.net/QLCH/resources/images/cancel-blue.png') 
     no-repeat   3px 9px #fff;

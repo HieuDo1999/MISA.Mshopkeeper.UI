@@ -69,7 +69,7 @@
                <th class="column shop-status">
                 <div class="th-name">Trang thai</div>
                 <div class="th-filter">
-                  <select name="" id="" v-model="filterStoreStatus" @change="filterStoreWithStatus">
+                  <select class="" name="" id="" v-model="filterStoreStatus" @change="filterStoreWithStatus">
                     <option :value="1">Đang hoạt động</option>
                     <option :value="0">Ngừng hoạt động</option>
                   </select>
