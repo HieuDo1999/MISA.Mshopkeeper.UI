@@ -36,7 +36,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" />
+                  <input class="input-filter" v-model="filterStoreCode" @keyup="filterStoreWithStoreCode"/>
                 </div>
               </th>
               <th class="column shop-name">
@@ -45,7 +45,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" />
+                  <input class="input-filter" v-model="filterStoreName" @keyup="filterStoreWithStoreName" />
                 </div>
               </th>
                <th class="column shop-address">
@@ -54,7 +54,7 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" />
+                  <input class="input-filter" v-model="filterAddress" @keyup="filterStoreWithAddress"/>
                 </div>
               </th>
                <th class="column shop-phone">
@@ -63,15 +63,15 @@
                   <div class="btn-filter">
                     <div class="icon-option-filter">*</div>
                   </div>
-                  <input class="input-filter" />
+                  <input class="input-filter" v-model="filterStorePhone" @keyup="filterStoreWithPhoneNumber"/>
                 </div>
               </th>
                <th class="column shop-status">
                 <div class="th-name">Trang thai</div>
                 <div class="th-filter">
-                  <select name="" id="">
-                    <option value="">Dang hoat dong</option>
-                    <option value="">1</option>
+                  <select name="" id="" v-model="filterStoreStatus" @change="filterStoreWithStatus">
+                    <option :value="1">Đang hoạt động</option>
+                    <option :value="0">Ngừng hoạt động</option>
                   </select>
                 </div>
               </th>
@@ -168,6 +168,27 @@ export default {
     this.getTotalPages();
   },
   methods:{
+   async filterStoreWithStoreCode(){
+     const res= await axios.get(`https://localhost:44362/api/v1/stores/GetStoreFilter?storeCode=${this.filterStoreCode}`)
+     this.stores=res.data
+    },
+    async filterStoreWithStoreName(){
+ const res= await axios.get(`https://localhost:44362/api/v1/stores/GetStoreFilter?storeName=${this.filterStoreName}`)
+     this.stores=res.data
+    },
+    async filterStoreWithAddress(){
+ const res= await axios.get(`https://localhost:44362/api/v1/stores/GetStoreFilter?address=${this.filterAddress}`)
+     this.stores=res.data
+    },
+    async filterStoreWithPhoneNumber(){
+ const res= await axios.get(`https://localhost:44362/api/v1/stores/GetStoreFilter?phoneNumber=${this.filterStorePhone}`)
+     this.stores=res.data
+    },
+    async filterStoreWithStatus(){
+   const res= await axios.get(`https://localhost:44362/api/v1/stores/GetStoreFilter?status=${this.filterStoreStatus}`)
+     this.stores=res.data
+    },
+
     disappear(){
       this.isMsDelete=false
     },

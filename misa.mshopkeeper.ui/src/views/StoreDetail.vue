@@ -113,7 +113,8 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Quốc gia</label>
-              <select name="" id="" class="d-select" v-model="store.countryId" @change="changeCountry(store.countryId)">
+              <select name="" id="" class="d-select" v-model="store.countryId"
+               @change="changeCountry(store.countryId)">
                 <option :value="this.country.countryId" v-if="country.countryId">
                   {{ this.country.countryName }}
                 </option>
@@ -131,7 +132,9 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Tỉnh/Thành phố</label>
-              <select class="d-select" v-model="store.provinceId" @change="changeProvince(store.provinceId)" :disabled="(Object.keys(this.store).length?false:true)||this.store.countryId=={}">
+              <select class="d-select" v-model="store.provinceId" 
+              @change="changeProvince(store.provinceId)" 
+              :disabled="(Object.keys(this.store).length?false:true)||this.store.countryId==null">
                 <option :value="province.provinceId" v-if="province.provinceId">
                   {{ province.provinceName }}
                 </option>
@@ -139,6 +142,7 @@
                   v-for="province in provinces"
                   :key="province.id"
                   :value="province.provinceId"
+
                 >
                   {{ province.provinceName }}
                 </option>
@@ -146,7 +150,9 @@
             </div>
             <div class="dialog-sub-row">
               <label for="" class="left-label">Quận/Huyện</label>
-              <select class="d-select" v-model="store.districtId" @change="changeDistrict(store.districtId)" >
+              <select class="d-select" v-model="store.districtId"
+               @change="changeDistrict(store.districtId)" 
+               :disabled="(Object.keys(this.store).length?false:true)||this.store.provinceId==null">
                 <option :value="district.districtId" v-if="district.districtId">
                   {{ district.districtName }}
                 </option>
@@ -163,7 +169,9 @@
           <div class="dialog-row">
             <div class="dialog-sub-row">
               <label for="">Phường/Xã</label>
-              <select class="d-select" v-model="store.wardId"  >
+              <select class="d-select" v-model="store.wardId" 
+                  :disabled="(Object.keys(this.store).length?false:true)||this.store.districtId==null">
+               >
                 <option :value="ward.wardId" v-if="ward.wardId" >{{ ward.wardName }}</option>
                 <option
                   v-for="ward in wards"
@@ -261,7 +269,6 @@ export default {
     }else{
     this.fetchDataAdd();
     }
- 
   },
   methods: {
     async fetchDataDetail() {
@@ -320,20 +327,27 @@ export default {
     async changeCountry(countryId){
       const res=await  axios.get("https://localhost:44362/api/v1/provinces/GetProvinceWithCountry/"+ countryId)
       this.provinces=res.data
+     
       this.province={};
-      this.district={}
-      this.ward={}
+     
+      this.districts=[];
+      this.district={};
+   
+      this.ward={};
+      this.wards=[]
     },
    async changeProvince(provinceId){
         const res= await axios.get("https://localhost:44362/api/v1/districts/GetDistrictWithProvince/" + provinceId)
         this.districts=res.data
         this.district={}
         this.ward={}
+        this.wards=[]
     },
     async changeDistrict(districtId){
-      const res= await axios.get("https://localhost:44362/api/v1/wards/GetWardWithDistrict/"+districtId)
+      const res= await axios.get("https://localhost:44362/api/v1/wards/GetWardWithDistrict/"+ districtId)
       this.wards=res.data
       this.ward={}
+
     },
 
 
