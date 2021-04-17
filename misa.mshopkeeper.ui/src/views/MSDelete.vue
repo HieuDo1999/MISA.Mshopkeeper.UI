@@ -4,12 +4,12 @@
     <div class="alert-container">
         <div class="alert-header">
             <div class="title">Misa eShop</div>
-            <div class="icon-x" @click="agree"></div>
+            <div class="icon-x" ></div>
         </div>
         <div class="alert-content">
             <div class="icon-alert"></div>
             <div class="content-text">
-              Đã tồn tại mã cửa hàng
+              Xóa thành công cửa hàng
              
             </div>
         </div>
@@ -28,7 +28,7 @@
 export default {
     methods:{
      agree(){
-         this.$emit("agree");
+         this.$emit("disappear");
      }
     }
 
@@ -37,4 +37,14 @@ export default {
 
 <style scoped>
 @import "../styles/layout/alert.css";
+.icon-alert{
+ background: url('https://eshopvnappg1.misacdn.net/QLCH/resources/images/icon-popup.png') 
+      no-repeat  -3px -2px !important;
+      height:44px;
+      width: 44px;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+}
+
 </style>

@@ -9,7 +9,7 @@
       <div class="icon-toolbar icon-duplicate"></div>
       <div class="btn-text text-duplicate">Nhân bản</div>
     </button>
-    <button class="btn btn-toolbar" @click="edit" :class="{disable: (Object.keys(this.selectedStore).length?false:true)} " :disabled="(this.selectedStore==Object.empty?true:false)">
+    <button class="btn btn-toolbar" @click="edit" :class="{disable: (Object.keys(this.selectedStore).length?false:true)} " :disabled="((Object.keys(this.selectedStore).length?false:true))">
       <div class="icon-toolbar icon-edit"></div>
       <div class="btn-text text-edit">Sửa</div>
     </button>
@@ -86,6 +86,9 @@
           <td class="store-status" v-if="store.status">Đang hoạt động</td>
           <td class="store-status" v-else>Ngừng hoạt động</td>
           </tr>
+
+         
+          
           </tbody>
         </table>  
       </div>
@@ -94,15 +97,15 @@
           <div class="wrap-icon wrap-icon-1">
           <div class="icon-1"></div>
           </div>
-           <div class="wrap-icon wrap-icon-2">
+           <div class="wrap-icon wrap-icon-2" @click="previousPage">
           <div class="icon-2"></div>
           </div>
           <div class="page-title">Trang</div>
           <div class="wrap-page-number">
-            <input class="input-page-number" value="1">
+            <input class="input-page-number" v-model="pageCurrent" @change="fetchStores" @keyup="fetchStores">
           </div>
-          <div class="page-total">tren 2</div>
-           <div class="wrap-icon wrap-icon-3">
+          <div class="page-total">trên {{this.totalPages}}</div>
+           <div class="wrap-icon wrap-icon-3" @click="nextPage">
           <div class="icon-3"></div>
           </div>
            <div class="wrap-icon wrap-icon-4">
@@ -125,9 +128,10 @@
         </div>
       </div>
     </div>
-    <StoreDetail @refresh="refresh"  @closeDialog="closeDialog" v-if="!isHideParent" :store="store" ></StoreDetail>
+    <StoreDetail @alertDuplicateStoreCode="alertDuplicateStoreCode" @refresh="refresh"  @closeDialog="closeDialog" v-if="!isHideParent" :store="store" ></StoreDetail>
     <ConfirmDelete @cancelDelete="cancelDelete" @deleteStore="deleteStore" v-if="isConfirm" :store="store" ></ConfirmDelete>
     <Alert @agree="agree" v-if="isAlert"></Alert>
+     <MSDelete @disappear="disappear" v-if="isMsDelete"></MSDelete>
   </div>
 </template>
 
@@ -137,8 +141,9 @@ import StoreDetail from './StoreDetail.vue';
 import axios from 'axios';
 import ConfirmDelete from './ConfirmDelete.vue';
 import Alert from './Alert.vue';
+import MSDelete from './MSDelete.vue';
 export default {
-  components: {  StoreDetail, ConfirmDelete, Alert },
+  components: {  StoreDetail, ConfirmDelete, Alert, MSDelete },
   data(){
     return {
       isHideParent: true,
@@ -146,21 +151,44 @@ export default {
       store:{},
       isConfirm:false,
       isAlert:false,
+      isMsDelete:false,
       selectedStore:{},
       storeId:null,
       filterStoreCode:"",
       filterStoreName:"",
       filterAddress:"",
       filterStorePhone:"",
-      filterStoreStatus:""
+      filterStoreStatus:"",
+      totalPages:0,
+      pageCurrent:1,
     }
   },
   created(){
     this.fetchStores();
-
+    this.getTotalPages();
   },
   methods:{
-     
+    disappear(){
+      this.isMsDelete=false
+    },
+    nextPage(){
+      if(this.pageCurrent==this.totalPages){
+        return
+      }
+      this.pageCurrent++;
+      this.refresh()
+    },
+    previousPage(){
+       if(this.pageCurrent==1){
+        return
+      }
+      this.pageCurrent--;
+      this.refresh()
+    },
+    async getTotalPages(){
+      const res=await axios.get(`https://localhost:44362/api/v1/stores/GetCountStores`);
+      this.totalPages=res.data/14;
+    },
       edit(){
       this.isHideParent=false;
       }
@@ -171,24 +199,27 @@ export default {
     },
     async deleteStore(){
       var response=await axios.delete(`https://localhost:44362/api/v1/stores/${this.storeId}` ,)
-       if(response){
-         alert("done")
+       if(response){  
+         this.isMsDelete=true
          this.isConfirm=false;
          this.refresh()
-    }
+        }
     },
 
     closeDialog(){
       this.isHideParent=true;
     },
     async fetchStores(){
-       var response=await axios.get("https://localhost:44362/api/v1/stores")
+       var response=await axios.get(`https://localhost:44362/api/v1/Stores/GetStoreByIndexOffset?positionStart=${14*(this.pageCurrent-1)+1}&offSet=14`)
           this.stores=response.data
         
     },
     detail(store){
       this.isHideParent=false;
       this.store=store;
+    },
+    alertDuplicateStoreCode(){
+      this.isAlert=true;
     },
     refresh(){
       this.fetchStores();

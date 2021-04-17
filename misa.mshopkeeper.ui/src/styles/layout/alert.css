@@ -61,6 +61,7 @@
       top: 10px;
   }
   .content-text{
+    margin-top:10px;
     height: 34px;
     position: absolute;
     left: 64px;

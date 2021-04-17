@@ -369,6 +369,10 @@ export default {
       this.$emit("closeDialog", true);
       this.$emit("refresh", true);
     },
+    alertDuplicateStoreCode(){
+      this.$emit('alertDuplicateStoreCode');
+    }
+    ,
     validate(fieldName, fieldValue) {
       this.validateFields.filter((c) => {
         if (c == fieldName) {
@@ -403,10 +407,16 @@ export default {
       if (this.isValidate) {
         if(this.store.storeId){
           this.store.status=this.status?1:0;
+          const validate= await axios.get(`https://localhost:44362/api/v1/stores/GetStoreByStoreCode?storeCode=${this.store.storeCode}`)
+          if(!validate.data){
            const res=await axios.put(`https://localhost:44362/api/v1/stores/${this.store.storeId}`, this.store);
            if(res){
              this.store={}
            }
+          }else{
+            // Alert
+            this.alertDuplicateStoreCode()
+          }
         }else{
          const res= await axios.post("https://localhost:44362/api/v1/stores", this.store);
          if(res){
@@ -483,7 +493,7 @@ export default {
       return valid;
     },
     reFocus() {
-      this.focusFirstElement();
+     this.$refs.storeCode.focus();
     },
     showForm() {
       this.removeValidate();
