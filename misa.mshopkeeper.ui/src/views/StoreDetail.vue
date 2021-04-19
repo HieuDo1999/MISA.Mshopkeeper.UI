@@ -32,7 +32,6 @@
               @blur="validate('storeCode', store.storeCode)"
               :class="{ warn: this.validateFieldsName.storeCode == false }"
             />
-
             <div
               v-if="
                 !this.validateFieldsName.storeCode &&
@@ -53,10 +52,10 @@
             <label> Tên cửa hàng <span class="text-red">*</span> </label>
             <input
               type="text"
-              class="d-input required"
+              class="d-input"
               v-model="store.storeName"
               @blur="validate('storeName', store.storeName)"
-              :class="{ warn: !this.validateFieldsName.storeName }"
+              :class="{ warn: this.validateFieldsName.storeName == false }"
             />
             <div
               v-if="
@@ -77,14 +76,12 @@
           <div class="dialog-row">
             <label> Địa chỉ <span class="text-red">*</span> </label>
             <textarea
-              name=""
-              id=""
               cols="100"
               rows="3"
-              class="d-text-area required"
+              class="d-text-area"
               v-model="store.address"
               @blur="validate('address', store.address)"
-              :class="{ warn: !this.validateFieldsName.address }"
+              :class="{ warn: this.validateFieldsName.address == false }"
             ></textarea>
             <div
               v-if="
@@ -121,8 +118,6 @@
             <div class="dialog-sub-row">
               <label for="">Quốc gia</label>
               <select
-                name=""
-                id=""
                 class="d-select"
                 v-model="store.countryId"
                 @change="changeCountry(store.countryId)"
@@ -182,6 +177,7 @@
                 <option :value="district.districtId" v-if="district.districtId">
                   {{ district.districtName }}
                 </option>
+
                 <option
                   v-for="district in districts"
                   :key="district.id"
@@ -223,34 +219,37 @@
           </div>
           <div class="dialog-row" v-if="store.storeId">
             <div class="checkbox-wrap">
-              <input type="checkbox" v-model="this.status" />
+              <input type="checkbox" v-model="status" />
+              <!-- <div class="tick-checkbox"></div> -->
               <div class="checkbox-text">Ngừng hoạt động</div>
             </div>
           </div>
         </div>
         <div class="dialog-footer">
           <div class="dialog-footer-left">
-            <div class="btn-help">
+            <button class="btn-help" @focus="focusHelp" ref="focusHelp" >
               <div
                 class="d-icon icon-help"
                 style="background-size: contain"
               ></div>
               <div class="d-text text-help">Trợ giúp</div>
-            </div>
+            </button>
           </div>
           <div class="dialog-footer-right">
-            <button class="btn-right btn-save" @click="save">
+            <button class="btn-right btn-save" ref="focusSave" @click="save" @focus="focusSave">
               <div class="icon-save"></div>
               <div class="text-save">Lưu</div>
             </button>
-            <button class="btn-right btn-plus" @click="saveAndAdd">
+            <button class="btn-right btn-plus" ref="focusSaveAndAdd" @click="saveAndAdd" @focus="focusSaveAndAdd">
               <div class="icon-plus"></div>
               <div class="text-plus">Lưu và thêm mới</div>
             </button>
             <button
               class="btn-right btn-cancel"
-              @keydown="reFocus"
+              @keydown.tab.prevent="reFocus"
               @click="cancel"
+              ref="focusCancel"
+              @focus="focusCancel"
             >
               <div class="footer-icon-x"></div>
               <div class="text-cancel">Hủy bỏ</div>
@@ -266,9 +265,10 @@
 </style>
 <script>
 import axios from "axios";
+
 export default {
   name: "Dialog",
-  props: ["store"],
+  props: ["store", "isAdd"],
   data: function () {
     return {
       submitTypeP: "",
@@ -297,7 +297,7 @@ export default {
     };
   },
   created() {
-    if (this.store.storeId) {
+    if (!this.isAdd) {
       this.fetchDataDetail();
     } else {
       this.fetchDataAdd();
@@ -305,61 +305,44 @@ export default {
   },
   methods: {
     async fetchDataDetail() {
-      try {
-        let [
-          country,
-          countrys,
-          province,
-          provinces,
-          district,
-          districts,
-          ward,
-          wards,
-        ] = await Promise.all([
-          axios.get(
-            "https://localhost:44362/api/v1/countrys/" + this.store.countryId
-          ),
-          axios.get("https://localhost:44362/api/v1/countrys"),
-          axios.get(
-            "https://localhost:44362/api/v1/provinces/" + this.store.provinceId
-          ),
-          axios.get(
-            "https://localhost:44362/api/v1/provinces/GetProvinceWithCountry/" +
-              this.store.countryId
-          ),
-          axios.get(
-            "https://localhost:44362/api/v1/districts/" + this.store.districtId
-          ),
-          axios.get(
-            "https://localhost:44362/api/v1/districts/GetDistrictWithProvince/" +
-              this.store.provinceId
-          ),
-          axios.get(
-            "https://localhost:44362/api/v1/wards/" + this.store.wardId
-          ),
-          axios.get(
-            "https://localhost:44362/api/v1/wards/GetWardWithDistrict/" +
-              this.store.districtId
-          ),
-        ]);
-        this.country = country.data;
-        this.province = province.data;
-        this.district = district.data;
-        this.ward = ward.data;
-        this.countrys = countrys.data.filter((c) => {
-          return c.countryId != this.country.countryId;
-        });
-        this.provinces = provinces.data.filter((c) => {
-          return c.provinceId != this.province.provinceId;
-        });
-        this.districts = districts.data.filter((c) => {
-          return c.districtId != this.district.districtId;
-        });
-        this.wards = wards.data.filter((c) => {
-          return c.wardId != this.ward.wardId;
-        });
-      } catch (e) {
-        console.log(e);
+      if (this.isAdd == false) {
+        try {
+          if (this.store.countryId != null) {
+            const country = await axios.get(
+              "https://localhost:44362/api/v1/countrys/" + this.store.countryId
+            );
+            this.country = country.data;
+          }
+          const countrys = await axios.get(
+            "https://localhost:44362/api/v1/countrys"
+          );
+          if (this.store.provinceId != null) {
+            const province = await axios.get(
+              "https://localhost:44362/api/v1/provinces/" +
+                this.store.provinceId
+            );
+            this.province = province.data;
+          }
+          if (this.store.districtId != null) {
+            const district = await axios.get(
+              "https://localhost:44362/api/v1/districts/" +
+                this.store.districtId
+            );
+            this.district = district.data;
+          }
+          if (this.store.wardId != null) {
+            const ward = await axios.get(
+              "https://localhost:44362/api/v1/wards/" + this.store.wardId
+            );
+            this.ward = ward.data;
+          }
+
+          this.countrys = countrys.data.filter((c) => {
+            return c.countryId != this.country.countryId;
+          });
+        } catch (e) {
+          console.log(e);
+        }
       }
     },
     async changeCountry(countryId) {
@@ -368,12 +351,9 @@ export default {
           countryId
       );
       this.provinces = res.data;
-
       this.province = {};
-
       this.districts = [];
       this.district = {};
-
       this.ward = {};
       this.wards = [];
     },
@@ -431,19 +411,26 @@ export default {
       this.$emit("alertDuplicateStoreCode");
     },
     validate(fieldName, fieldValue) {
+      var flag = true;
       this.validateFields.filter((c) => {
         if (c == fieldName) {
           if (fieldValue == null || fieldValue == "") {
             this.validateFieldsName[`${fieldName}`] = false;
+            flag = false;
           } else {
             this.validateFieldsName[`${fieldName}`] = true;
           }
         }
       });
+      if (flag == true) {
+        this.isValidate = true;
+      }
     },
     validateForSaveAndAdd() {
       this.validateFields.filter((c) => {
+       
         if (this.store[`${c}`] == null || !this.store[`${c}`]) {
+         
           this.validateFieldsName[`${c}`] = false;
           this.isValidate = false;
         }
@@ -463,46 +450,52 @@ export default {
       this.validateForSaveAndAdd();
       if (this.isValidate) {
         if (this.store.storeId) {
-          this.store.status = this.status ? 1 : 0;
+          this.store.status = this.status ? 0 : 1;
+          const res = await axios.put(
+            `https://localhost:44362/api/v1/stores/${this.store.storeId}`,
+            this.store
+          );
+          if (res) {
+            this.$emit("setStoreNull");
+          }
+        } else {
           const validate = await axios.get(
             `https://localhost:44362/api/v1/stores/GetStoreByStoreCode?storeCode=${this.store.storeCode}`
           );
           if (!validate.data) {
-            const res = await axios.put(
-              `https://localhost:44362/api/v1/stores/${this.store.storeId}`,
+            const res = await axios.post(
+              "https://localhost:44362/api/v1/stores",
               this.store
             );
             if (res) {
-              this.store = {};
+              this.$emit("setStoreNull");
+              this.$emit("refresh", true);
             }
           } else {
-            // Alert
             this.alertDuplicateStoreCode();
-          }
-        } else {
-          const res = await axios.post(
-            "https://localhost:44362/api/v1/stores",
-            this.store
-          );
-          if (res) {
-            this.store = {};
-            this.$emit("refresh", true);
           }
         }
       } else {
         return;
       }
     },
+    focusHelp() {
+      this.$refs.focusHelp.focus();
+    },
+    focusSave(){
+      this.$refs.focusSave.focus();
+    },
+    focusSaveAndAdd(){
+       this.$refs.focusSaveAndAdd.focus();
+    },
+    focusCancel(){
+      this.$refs.focusCancel.focus();
+    },
     async save() {
       this.validateForSaveAndAdd();
       if (this.isValidate) {
         if (this.store.storeId) {
-          this.store.status = this.status ? 1 : 0;
-          const validate = await axios.get(
-            `https://localhost:44362/api/v1/stores/GetStoreByStoreCode?storeCode=${this.store.storeCode}`
-          );
-
-          if(!validate.data){
+          this.store.status = this.status ? 0 : 1;
           const res = await axios.put(
             `https://localhost:44362/api/v1/stores/${this.store.storeId}`,
             this.store
@@ -510,17 +503,21 @@ export default {
           if (res) {
             this.$emit("closeDialog", true);
           }
-          }else{
-             this.alertDuplicateStoreCode();
-          }
         } else {
-          const res = await axios.post(
-            "https://localhost:44362/api/v1/stores",
-            this.store
+          const validate = await axios.get(
+            `https://localhost:44362/api/v1/stores/GetStoreByStoreCode?storeCode=${this.store.storeCode}`
           );
-          if (res) {
-            this.$emit("closeDialog", true);
-            this.$emit("refresh", true);
+          if (!validate.data) {
+            const res = await axios.post(
+              "https://localhost:44362/api/v1/stores",
+              this.store
+            );
+            if (res) {
+              this.$emit("closeDialog", true);
+              this.$emit("refresh", true);
+            }
+          } else {
+            this.alertDuplicateStoreCode();
           }
         }
       } else {
@@ -581,9 +578,7 @@ export default {
     updateFunc() {
       console.log("update");
     },
-    addFunc() {
-      console.log("add");
-    },
+    addFunc() {},
     submitFunc(e) {
       // kiểm tra dữ liệu hợp lệ
       e.preventDefault();
